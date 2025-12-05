@@ -1,0 +1,15 @@
+{
+    "manufacturers":"Producent",
+    "product":"Produkt",
+    "login":"Zaloguj się",
+    "login_error":"Błąd logowania",
+    "please_login":"prosze sie zalogowac",
+    "work":"Praca",
+    "account":"Konto",
+    "time":"Czas",
+    "days":"Dni",
+    "config":"Konfiguracja",
+    "admin_panel":"Panel administracyjny",
+    "home":"Dom",
+    "footer_copyright":"2021 Wszelkie prawa zastrzeżone.<b> maxkod.pl</b>"
+}

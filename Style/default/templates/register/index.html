@@ -1,0 +1,80 @@
+<br>
+<div class="row">
+    <div class="col-md-4 col-md-offset-4 col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <fieldset>
+                    <legend><h1><?php print Lib\Msg::Get('_REGISTER_','Register') ?></h1></legend>
+                        <form role="form" method="POST">               
+                            
+                            <div class="form-group">
+                                <label><?php print Lib\Msg::Get('_DOMAIN_','Domain') ?></label>
+                                <input id="domain" 
+                                       type="text" 
+                                       class="form-control" 
+                                       placeholder="<?php print Lib\Msg::Get('_DOMAIN_','Domain') ?>" 
+                                       name="<?php print REGISTER_DOMAIN ?>" 
+                                       value="<?php print $this->model->getDomain()->getValue() ?>">
+                                <div id="domain_valid"></div>
+                                <?php print $this->RenderValidationError($this->model->getDomain()->getErrorText()); ?>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label><?php print Lib\Msg::Get('_EMAIL_','Email') ?></label>
+                                <input id="email" 
+                                       type="text" 
+                                       class="form-control" 
+                                       placeholder="<?php print Lib\Msg::Get('_EMAIL_','Email') ?>" 
+                                       name="<?php print REGISTER_EMAIL ?>" 
+                                       value="<?php print $this->model->getEmail()->getValue() ?>">
+                                <div id="email_valid"></div>
+                                <?php print $this->RenderValidationError($this->model->getEmail()->getErrorText()); ?>
+                            </div>
+                        
+                            <div class="form-group">
+                                <label><?php print Lib\Msg::Get('_PASSWORD_','Password') ?></label>
+                                <input type="password" 
+                                       class="form-control" 
+                                       placeholder="<?php print Lib\Msg::Get('_PASSWORD_','Password') ?>" 
+                                       name="<?php print REGISTER_PASSWORD ?>" 
+                                       value="<?php print $this->model->getPassword()->getValue() ?>">
+                                <?php print $this->RenderValidationError($this->model->getPassword()->getErrorText()); ?>
+                            </div>
+                            <hr>
+                        
+                            
+                            
+                            <hr>
+                           
+                            <input type="hidden" name="<?php print METHOD ?>" value="<?php print METHOD_SAVE ?>">
+                            <button class="btn btn-primary pull-right"><?php print Lib\Msg::Get('_REGISTER_','Register') ?></button>                            
+                        </form>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+    $('#email_not_used').keyup(function ()
+    {
+        changevalue('#email_valid');
+    });
+     
+     function changevalue(e1)
+     {
+          $(e1).html('checking');
+          $.get
+          ('page/options' ,
+               function(data)
+               {
+                    /* alert(data); */
+                    $(e1).html(data);
+               }
+          );
+     }
+
+</script>
+
+

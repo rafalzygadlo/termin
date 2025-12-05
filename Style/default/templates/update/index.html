@@ -1,0 +1,51 @@
+<div id="page-header">
+	<div class="row">
+		<div class="container">
+	     
+		<a id="update">start</a>
+		<div id="download">download</div>
+	
+		</div>
+	 </div>
+</div>
+
+
+<script>
+	$(document).on("click","#update",function()
+	{
+			
+		$.ajax
+		({
+			type: 'POST',
+			url: "update/start",
+			data: {},		
+			xhr: function()
+			{
+				var xhr = $.ajaxSettings.xhr();
+				
+				xhr.onprogress = function(evt)
+				{
+					
+						var percentComplete = evt.loaded / evt.total;
+						
+						$('#download').html(percentComplete);
+				        console.log(evt.loaded);
+						console.log(evt.total);
+						console.log(evt);
+					
+				};
+				
+				return xhr;
+			},
+						
+			
+			
+			success: function(data)
+			{
+			    $('#download').html('done');			 
+				/* Do something success-ish */
+			}
+		});
+	});
+	
+</script>

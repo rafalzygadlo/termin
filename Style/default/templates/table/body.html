@@ -1,0 +1,43 @@
+ <?php
+ //$count = sizeof($view->Columns);
+        print '<tbody>';
+        //print '<tr><td colspan=$count></tr>';
+        $id = (($page - 1) * $limit) + 1;
+
+
+        foreach ($items as $item)
+        {
+            if ($item->getActive() == STATUS_NOT_ACTIVE)
+                $strikeout = 'strikeout';
+            else
+                $strikeout = '';
+            
+            if ($id == $item->getId())
+                print '<tr id="tr' . $item->getId() . '" class="success ' . $strikeout . ' ">';
+            else
+                print '<tr id="tr' . $item->getId() . '" class="' . $strikeout . '">';
+            
+			
+            print '<td width="50px;" id="column_select"><center><input type="checkbox" name="'.IDSELECTED.'" value="'.$item->getId().'"></center></td>';
+            print '<td width="100px;">';
+            $this->RenderRowMenu($this, $item);
+            print '</td>';
+            print '<td class="text-right">' . $id . '</td>';
+
+            foreach ($columns as $column)
+            {
+                if ($column->getVisible())
+                {
+                    print '<td>';
+                    $column->render($this, $item);
+                    print '</td>';
+                }
+            }
+
+            print '</tr>';
+            $id++;
+        }
+
+
+        print '</tbody>';
+    

@@ -1,0 +1,38 @@
+<div class="container">     
+     <h2><?php print __("Home"); ?></h2>
+     <div class="row"> 
+          <div class="col">
+               Information about service.
+               <br> 
+               <br>
+               <h3>How to access a service.</h3>
+               Fill the form 
+               <br>
+               Please contact: <a href>contact@tec-point.de</a>
+          </div>
+
+          <div class="col-md-6">
+          
+            
+            <form action="register/do" method="post">
+              
+              <div class="form-floating mb-3">
+                <input name="empl_id" class="form-control form-control-lg" placeholder="empl id">           
+              </div>
+          
+              <div class="form-floating mb-3">
+                <input type="password" name="password" class="form-control form-control-lg" placeholder="password"> 
+              </div>
+          
+          
+              <button class=" btn btn-lg btn-primary" type="submit"><?php print __("Register") ?></button>
+              <hr class="my-4">
+              <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+            </form>
+         
+     </div>
+     
+     
+     
+</div>
+

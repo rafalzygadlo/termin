@@ -1,0 +1,39 @@
+<?php
+$columns = 4;
+$id = 1;
+$counter = 1;
+$col = 12 / $columns;
+$length = sizeof($this->getItems());
+
+foreach ($this->getItems() as $item)
+{
+        if ($counter == 1)
+        {
+            print '<div class="row">';
+        }
+
+            print '<div class="col-sm-' . $col . ' col-md-' . $col . '">';
+            print '<div class="panel panel-default text-center">';
+
+            foreach ($this->getColumns() as $column)
+            {
+                if ($column->getVisible())
+                {
+                    $column->render($this, $item);
+					print '<br>';
+                }
+            }
+
+            print '<b><a href="'.$this->getCtrlName().'/'.METHOD_PARENT.'/'.$item->getId().'">'.$item->getTitle().'</a></b>';
+            print '</div>';
+            print '</div>';
+
+            if ($counter == $columns || $id == $length)
+            {
+                print '</div>';
+                $counter = 0;
+            }
+
+            $counter++;
+            $id++;
+        }

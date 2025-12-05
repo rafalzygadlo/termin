@@ -1,0 +1,59 @@
+
+<div class="panel panel-default">
+<div class="panel-body">
+<div class="col-md-5 col-sm-12">
+
+<?php
+if ($this->buttonNew)
+{
+     print ' <a href="' . $url . '/' . METHOD_ADD . '" class="btn btn-default btn-sm">' . $this->msg('_NEW_', 'New') . '</a>';
+     //print '</div>';
+}
+
+        //$this->RenderButtonNew($view);
+
+        //print '<div class="col-md-2 col-sm-12">';
+        //print ' <a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-chevron-up"></span>sele</a>';
+        print ' <a href="' . $this->getCtrlName() . '" class="btn btn-default btn-sm">' . $this->getTitle() . ' <span class="label label-danger"> ' . $count . '</span></a>';
+        //print '</div>';
+        //print '<div class="col-md-2 col-sm-12">';
+        print ' ';
+        foreach ($limits as $lm)
+        {
+            if ($limit == $lm)
+            {
+                print '<a href="' . $url . '/' . METHOD_LIMIT . '-' . $lm . '" class="btn btn-primary btn-sm">' . $lm . '</a>';
+            }
+            else
+            {
+                print '<a href="' . $url  . '/' . METHOD_LIMIT . '-' . $lm . '"  class="btn btn-default btn-sm">' . $lm . '</a>';
+            }
+        }
+
+        print '</div>';
+
+        print '<div class="col-md-7 col-sm-12">';
+        print '<form method="POST">';
+        print '<div class="input-group">';
+        print '<input type="text" class="form-control" onkeydown="getPage(\'#content\',0,\''.$this->getCtrlName().'/content\');" name="' . SEARCH . '" value="' . Lib\Session::GetSearch() . '" placeholder="' . Lib\Msg::Get('_SEARCH_', 'Search') . '">';
+        print '<input type="hidden" name="' . METHOD . '" value="' . METHOD_SEARCH . '">';
+        print '<span class="input-group-btn">';
+        print '<button class="btn btn-default" type="submit">' . Lib\Msg::Get('_SEARCH_', 'Search') . '</button>';
+        print '</span>';
+        print '</div>';
+        print '</form>';
+        print '</div>';
+        //print '</div>';
+        //print '<div class="panel-heading">';
+        print '<div class="row">';
+        print '<div class="col-md-12 col-sm-12">';
+
+        //print '<div class="col-md-9 col-sm-12">';
+        
+        //print '</div>';
+
+        print '</div>';
+        print '</div>';
+        print '</div>';
+        print '</div>';
+        //$this->renderBreadcrumb($view);

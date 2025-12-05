@@ -1,0 +1,44 @@
+<thead>
+<tr>
+<th><center><input type="checkbox" id="select_all"></center>
+     <a id="select_all" href=""><span class="glyphicon glyphicon glyphicon-ok"> </span> </a>
+     <a id="remove_selected" href="#"><span class="glyphicon glyphicon glyphicon-remove"> </span> </a>
+     <a id="remove_selected" href="#"><span class="glyphicon glyphicon glyphicon-remove"> </span> </a>
+</th>
+
+<th>
+<?php if ($id_parent > 0) { ?>
+    <a href="<?php print $url ?>/<?php print METHOD_PARENT ?>/<?php print $id ?>"
+       class="btn btn-default btn-sm"><span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+<?php } ?>
+</th>
+
+<th></th> <!-- liczba porządkowa -->
+        
+<?php
+    $id = 0;
+    foreach ($columns as $column)
+    {
+        if ($column->getVisible())
+            {
+                if ($order_column_id == $id)
+                {
+                    if ($asc == SORT_ASC)
+                    { 
+                      print '<th><a href="' . $this->getCtrlName() . '/' . METHOD_ORDER . '-' . $id . '/' . METHOD_ASC . '-' . SORT_DESC . '">'.$column->getName().' </a>';
+                      print '<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></th>';
+               }else{ 
+                    
+                  print'      <th><a href="' . $this->getCtrlName() . '/' . METHOD_ORDER . '-' . $id . '/' . METHOD_ASC . '-' . SORT_ASC . '">'. $column->getName().'</a>';
+ print'                       <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></th>';
+               }
+                }else{  
+       print '             <th><a href="' . $this->getCtrlName() . '/' . METHOD_ORDER . '-' . $id . '/' . METHOD_ASC . '-' . SORT_ASC . '">'.$column->getName().' </a></th>';
+         }
+            }
+            $id++;
+        }
+?>
+   </tr>
+ </thead>

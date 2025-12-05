@@ -1,0 +1,113 @@
+<style>
+  .code-digit {
+    width: 3rem;
+    height: 3rem;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .code-container {
+    display: flex;
+    justify-content: start;
+    gap: 0.5rem;
+  }
+</style>
+
+<div class="container">
+  <h2>One Time Password</h2>
+  <div class="row">
+    <div class="col">
+      <br>
+      Please login here.<br>
+      Enter your <b>code</b>
+    </div>
+
+    <div class="col-md-12">
+
+
+      <form method="post" action="login/verify" onsubmit="return collectCode()">
+
+        <label>
+
+          <div id="code-inputs" style="display: flex; gap: 5px;">
+            <div class="form-floating mb-3">
+              <input class="form-control code-digit form-control-lg" type="text" inputmode="numeric" pattern="\d"
+                maxlength="1" required>
+            </div>
+            <div class="form-floating mb-3">
+              <input class="form-control code-digit form-control-lg" type="text" inputmode="numeric" pattern="\d"
+                maxlength="1" required>
+            </div>
+            <div class="form-floating mb-3">
+              <input class="form-control code-digit form-control-lg" type="text" inputmode="numeric" pattern="\d"
+                maxlength="1" required>
+            </div>
+            <div class="form-floating mb-3">
+              <input class="form-control code-digit form-control-lg" type="text" inputmode="numeric" pattern="\d"
+                maxlength="1" required>
+            </div>
+            <div class="form-floating mb-3">
+              <input class="form-control code-digit form-control-lg" type="text" inputmode="numeric" pattern="\d"
+                maxlength="1" required>
+            </div>
+            <div class="form-floating mb-3">
+              <input class="form-control code-digit form-control-lg" type="text" inputmode="numeric" pattern="\d"
+                maxlength="1" required>
+            </div>
+
+          </div>
+        </label><br><br>
+
+        <!-- Ukryte pole, które połączymy z 6 cyfr -->
+        <input type="hidden" name="code" id="code-hidden">
+
+        <button class="btn btn-lg btn-primary" type="submit">check code</button>
+        <hr class="my-4">
+        <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  const inputs = document.querySelectorAll('.code-digit');
+
+  inputs.forEach((input, index) => {
+    input.addEventListener('input', () => {
+      if (input.value.length === 1 && index < inputs.length - 1) {
+        inputs[index + 1].focus();
+      }
+    });
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && input.value === '' && index > 0) {
+        inputs[index - 1].focus();
+      }
+    });
+
+    // Zapewniamy, że wpisywane są tylko cyfry
+    input.addEventListener('keypress', (e) => {
+      if (!/[0-9]/.test(e.key)) {
+        e.preventDefault();
+      }
+    });
+  });
+
+  function collectCode() {
+    let code = '';
+    inputs.forEach(input => {
+      code += input.value;
+    });
+
+    if (code.length !== inputs.length) {
+      alert('Wpisz cały 6-cyfrowy kod.');
+      return false; // blokuje submit
+    }
+
+    // Wstawiamy do ukrytego pola, które zostanie wysłane do serwera
+    document.getElementById('code-hidden').value = code;
+    return true; // pozwala na submit
+  }
+</script>

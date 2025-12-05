@@ -1,0 +1,40 @@
+<?php
+    use Lib\Msg;
+?>
+<div class="row">
+      <div class="col-md-4 col-md-offset-4">
+           <a href="<?php print $this->CtrlName ?>"  class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"> </span> </a>
+                <hr>
+        <form method="POST" action="<?php print $this->getCtrlName() ?>">
+            <fieldset>
+                <legend><?php print $this->getTitle() ?></legend>
+                
+                    <div class="form-group">
+                        <label class="control-label"><?php print Msg::Get('_CONST_','Const') ?></label>
+                        <input disabled type="text" class="form-control" placeholder="<?php print Msg::Get('_CONST_','Const') ?>" name="<?php print MSG_CONST ?>" value="<?php print $this->Const->value ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label"><?php print Msg::Get('_DEFAULT_VALUE_','Default Value') ?></label>
+                        <input disabled type="text" class="form-control" placeholder="<?php print Msg::Get('_DEFAULT_VALUE_','Default Value') ?>" name="<?php print MSG_DEFAULT_VALUE ?>" value="<?php print $this->DefaultValue->value ?>">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="control-label"><?php print Msg::Get('_USER_VALUE_','User Value') ?></label>
+                        <input type="text" class="form-control" placeholder="<?php print Msg::Get('_USER_VALUE_','User Value') ?>" name="<?php print MSG_USER_VALUE ?>" value="<?php print $this->UserValue->value ?>">
+                        <?php print $this->RenderValidationError($this->UserValue->getErrorText()); ?>
+                    </div>
+                    
+                    <div class="form-group">
+                            <input type="hidden" name="<?php print ID ?>" value="<?php print $this->IdMsg->value ?>">
+                            <input type="hidden" name="<?php print IDMSG ?>" value="<?php print $this->IdMsg->value ?>">
+                            <input type="hidden" name="<?php print METHOD ?>" value="<?php print METHOD_SAVE ?>">
+                            <button type="submit" class="btn btn-primary"><?php print Msg::Get('_SAVE_','Save') ?></button>
+                            <a href="<?php print $this->getCtrlName(); ?>"  class="btn btn-default"><?php print Msg::Get('_CANCEL_','Cancel') ?></a>
+                    </div>
+                    
+                
+            </fieldset>
+        </form>
+    </div>
+</div>

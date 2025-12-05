@@ -1,0 +1,25 @@
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row">
+          
+            <div class="col-md-12">
+                <div>
+                    <!-- Default panel contents -->
+                    <?php $this->RenderSelectedPage($this); ?>
+                        <?php if($this->getCount() > 0) ?>
+                        <?php { ?>
+                        <div class="panel-body text-right">
+                            <?php $this->include("grid/body.html"); ?>
+                        </div>
+                        <div class="panel-body text-right">
+                            <?php $this->include("pagination.html"); ?>
+                        <?php } ?>
+                        </div>
+                         
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

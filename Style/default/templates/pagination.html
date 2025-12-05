@@ -1,0 +1,37 @@
+<?php
+
+ if ($pages > 1)
+        {
+            
+            $start = $page - 3;
+            $end = $page + 3;
+            if ($start < 1)
+            {
+                $start = 1;
+                $end = 7;
+            }
+            if ($end > $pages)
+            {
+                $start = $pages - 6;
+                $end = $pages;
+            }
+            if ($start < 1)
+                $start = 1;
+
+            // url z kontrollerem
+
+            print '<ul class="pagination">';
+            for ($i = $start; $i < $end + 1; $i++)
+            {
+                if ($page == $i)
+                {
+                    print '<li class="active"><a href="' . $this->getCtrlName() . '/' . METHOD_PAGE . '-' . $i . '">' . $i . '</a></li>';
+                }
+                else
+                {
+                    print '<li><a href="' . $this->getCtrlName() . '/' . METHOD_PAGE . '-' . $i . '">' . $i . '</a></li>';
+                }
+            }
+            print '</ul>';
+        }
+    
