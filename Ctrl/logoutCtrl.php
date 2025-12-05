@@ -13,7 +13,7 @@
 
 namespace Ctrl;
 
-use Lib\Ctrl;
+use Core\Ctrl;
 
 class logoutCtrl extends Ctrl
 {
@@ -28,7 +28,7 @@ class logoutCtrl extends Ctrl
     //    $this->Index();
     //}
 
-    public function index()
+    public function Index()
     {
         session_destroy();
         unset($_SESSION);

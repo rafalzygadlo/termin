@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib;
+namespace Core;
 
 class View
 {
@@ -28,17 +28,17 @@ class View
         $this->values = $values;
     }
 
-    private function include($file)
+    private function Include($file)
     {
         extract($this->values);
         include $this->template_folder."/".$file;
     }
 
-    private function minimizeOutput($file)
+    private function MinimizeOutput($file)
     {
 		
         ob_start(); // 
-        $this->include($file);
+        $this->Include($file);
         $output = ob_get_contents(); // This contains the output of yourtemplate.php
         // Manipulate $output...
 
@@ -63,7 +63,7 @@ class View
         return $buffer;
     }
 
-    public function isTemplateExists($template)
+    public function IsTemplateExists($template)
     {
         $ext = pathinfo($template, PATHINFO_EXTENSION);
 
@@ -82,22 +82,22 @@ class View
             return false;
     }
 
-    private function renderPage($template)
+    private function RenderPage($template)
     {
-        $layout = $this->minimizeOutput($this->layout);
-        $buffer = $this->minimizeOutput($template);
+        $layout = $this->MinimizeOutput($this->layout);
+        $buffer = $this->MinimizeOutput($template);
         
     
         $buffer = str_replace("{{content}}",$buffer,$layout);		
 		return $buffer;
     }
 
-    private function renderContent($template)
+    private function RenderContent($template)
     {
          include $this->template_folder . '/' . $template;
     }
 
-    public function renderToBuffer($template = null)
+    public function RenderToBuffer($template = null)
     {
 
         if($template)
@@ -115,12 +115,12 @@ class View
         }
 
     
-        if ($this->isTemplateExists($template))
+        if ($this->IsTemplateExists($template))
         {
             if ($this->content)
-                $buffer = $this->renderContent($template);
+                $buffer = $this->RenderContent($template);
             else
-                $buffer = $this->renderPage($template);
+                $buffer = $this->RenderPage($template);
         }
 		else
         {
@@ -131,10 +131,9 @@ class View
 
     }
 
-    public function render($template = null)
+    public function Render($template = null)
     {
-        print $this->renderToBuffer($template);
-		
+        print $this->RenderToBuffer($template);
     }
 	
 	

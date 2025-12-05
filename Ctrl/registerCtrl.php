@@ -13,15 +13,15 @@
 
 namespace Ctrl;
 
-use Lib\Ctrl;
-use Lib\Tool;
+use Core\Ctrl;
+use Core\Tool;
 use Model\Register\registerModel;
 use Repository\registerRepository;
 
 class registerCtrl extends Ctrl
 {
   
-    public function readData($model)
+    public function ReadData($model)
     {
         $data = json_decode(file_get_contents("php://input"));
         if($data)
@@ -32,16 +32,16 @@ class registerCtrl extends Ctrl
     }
 
     
-    public function insert($model, $key)
+    public function Insert($model, $key)
     {
         $repo = new registerRepository();
         $repo->registerUser($model,$key);
         
     }
  
-    public function sendEmail($to,$key)
+    public function SendEmail($to,$key)
     {
-        $email = new \Lib\Email();
+        $email = new \Core\Email();
         $email->SendActivationLink($to, $key);
     }
     
@@ -49,7 +49,7 @@ class registerCtrl extends Ctrl
      * Endpoint register/confirm
      * 
      */
-    public function confirm()
+    public function Confirm()
     {
         $key = $_GET['key'];
         
@@ -62,8 +62,10 @@ class registerCtrl extends Ctrl
      * Endpoint register
      * 
      */    
-    public function index()
+    public function Index()
     {
+        print 'register endpoint';
+        exit;
       
         $model = new registerModel();
         $this->readData($model);
@@ -71,7 +73,7 @@ class registerCtrl extends Ctrl
         $model->getEmail()->getValue();
                 
       
-        $validator = new \Lib\Validator();
+        $validator = new \Core\Validator();
         $validator->add($model->getEmail());
         $validator->add($model->getPassword());
         

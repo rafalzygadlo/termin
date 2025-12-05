@@ -15,11 +15,11 @@
 namespace Ctrls;
 
 use \Alter;
-use Lib\Ctrl;
+use Core\Ctrl;
 
 class AlterCtrl extends Ctrl
 {
-    public function index()
+    public function Index()
     {
         //$alter = new \Libs\Alter();
         //$alter->run();

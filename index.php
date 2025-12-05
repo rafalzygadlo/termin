@@ -21,12 +21,12 @@
     include "Config/db.config.php";
     // end config files
     
-    Lib\Msg::init();
+    Core\Msg::init();
     //helper functions
-    function __($msg){ return Lib\Msg::get($msg);  }
+    function __($msg){ return Core\Msg::get($msg);  }
     
         
-    $app = new Lib\Bootstrap();
+    $app = new Core\Bootstrap();
     if(isset($argv))
         $app->Run($argv);
     else

@@ -12,7 +12,7 @@
  */
 
 
-namespace Lib;
+namespace Core;
 
 
 class FileLog

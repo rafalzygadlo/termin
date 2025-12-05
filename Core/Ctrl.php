@@ -12,7 +12,7 @@
  */
 
 
-namespace Lib;
+namespace Core;
 
 abstract class Ctrl
 {
@@ -20,9 +20,14 @@ abstract class Ctrl
     public $Model;
     public $Ctrl;
 
-	public function getStatus()
+	public function GetStatus()
 	{	
 		return true;
 	}
+
+	public function index()
+	{
+		print '<h1>Base Ctrl index</h1>';
+	}	
 
 }

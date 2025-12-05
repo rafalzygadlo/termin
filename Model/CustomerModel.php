@@ -13,7 +13,7 @@
 
  namespace Model;
  
- use Lib\Model;
+ use Core\Model;
  use PDO;
  
 class CustomerModel extends Model

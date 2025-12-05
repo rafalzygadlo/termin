@@ -13,10 +13,10 @@
 
 namespace Ctrl;
 
-use Lib\Ctrl;
-use Lib\View;
-use Lib\Email;
-use Lib\Checker\CheckerLogin;
+use Core\Ctrl;
+use Core\View;
+use Core\Email;
+use Core\Checker\CheckerLogin;
 use Repository\userRepository;
 
 class loginCtrl extends Ctrl
@@ -26,7 +26,7 @@ class loginCtrl extends Ctrl
         //$this->Email = new Email();
     }
 
-    public function do()
+    public function Do()
     {
         
         //check email
@@ -38,10 +38,10 @@ class loginCtrl extends Ctrl
         $view->render('login/code1');
     }
 
-    public function index()
+    public function Index()
     {	   
         $view = new View();
-        $view->render('login/index');
+        $view->Render('login/index');
           
     }
     

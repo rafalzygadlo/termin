@@ -13,7 +13,7 @@
  */
 
 
-namespace Lib;
+namespace Core;
 
 class Tools
 {

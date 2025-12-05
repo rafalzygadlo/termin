@@ -13,8 +13,8 @@
 
  namespace Model;
  
- use Lib\Model;
- use Lib\FileLog;
+ use Core\Model;
+ use Core\FileLog;
  use PDO;
  
 class CountryModel extends Model
@@ -69,7 +69,7 @@ class CountryModel extends Model
 		return $value;	
 	}
     
-    public function GetISO2($orders_id)
+	public function GetISO2($orders_id)
 	{
 		
         $params = array

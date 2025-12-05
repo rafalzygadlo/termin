@@ -6,7 +6,7 @@
   
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <!--<h4 class="modal-title"><?php print Lib\Msg::Get('_DELETE_','Delete') ?></h4> -->
+        <!--<h4 class="modal-title"><?php print Core\Msg::Get('_DELETE_','Delete') ?></h4> -->
       </div>
       
       <div class="modal-body text-center">
@@ -17,7 +17,7 @@
       </div>
     
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal"><?php print Lib\Msg::Get('_CLOSE_','Close') ?></button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?php print Core\Msg::Get('_CLOSE_','Close') ?></button>
       </div>
     </div>
   </div>
@@ -30,7 +30,7 @@
      <div class="row">
         <div class="col-sm-12">
           <h4><?php print $title ?> - <?php print $count.' / '.$count; ?></h4>
-          <h4><?php print Lib\Msg::Get('_PAGES_','Pages').' - '. $page.'/'. $pages ?></h4>
+          <h4><?php print Core\Msg::Get('_PAGES_','Pages').' - '. $page.'/'. $pages ?></h4>
         </div>
       </div>
        <?php $this->include("table/head.html"); 
@@ -62,10 +62,10 @@
             
             <div class="row">
             <div class="col-md-12 text-center">
-              <div class="alert text-center"><h2><?php print Lib\Msg::Get('_NO_ITEMS_','No Items') ?></h1></div>
+              <div class="alert text-center"><h2><?php print Core\Msg::Get('_NO_ITEMS_','No Items') ?></h1></div>
             </div>
             <div class="col-md-12 text-center">
-              <a href="<?php print $this->getCtrlName() . '/' . METHOD_ADD  ?>" class="btn btn-default btn-sm"><?php print Lib\Msg::Get('_NEW_', 'New') ?></a>
+              <a href="<?php print $this->getCtrlName() . '/' . METHOD_ADD  ?>" class="btn btn-default btn-sm"><?php print Core\Msg::Get('_NEW_', 'New') ?></a>
             </div>
             </div>
              

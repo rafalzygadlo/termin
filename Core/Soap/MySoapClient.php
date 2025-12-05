@@ -12,8 +12,8 @@
  */
 
 
-namespace Lib\Soap;
-use Lib\FileLog;
+namespace Core\Soap;
+use Core\FileLog;
 use SoapClient;
 
 class MySoapClient

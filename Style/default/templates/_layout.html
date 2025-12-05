@@ -39,9 +39,10 @@
 
               <div class="collapse navbar-collapse " id="navbarCollapse">
                 <ul class="navbar-nav ms-auto">
-                  <?php if(Lib\Session::getValidUser()) { ?>
+                  <?php if(Core\Session::getValidUser()) { ?>
                     <li class="nav-item"><a class="nav-link" href="logout"><?php print __('logout') ?></a></li>                    
                   <?php }else{ ?>
+                    <li class="nav-item"><a class="nav-link" href="register"><?php print __('register') ?></a></li>
                     <li class="nav-item"><a class="nav-link" href="login"><?php print __('login') ?></a></li>
                   <?php } ?>
                     

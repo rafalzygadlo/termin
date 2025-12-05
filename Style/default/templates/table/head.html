@@ -35,10 +35,10 @@ if ($this->buttonNew)
         print '<div class="col-md-7 col-sm-12">';
         print '<form method="POST">';
         print '<div class="input-group">';
-        print '<input type="text" class="form-control" onkeydown="getPage(\'#content\',0,\''.$this->getCtrlName().'/content\');" name="' . SEARCH . '" value="' . Lib\Session::GetSearch() . '" placeholder="' . Lib\Msg::Get('_SEARCH_', 'Search') . '">';
+        print '<input type="text" class="form-control" onkeydown="getPage(\'#content\',0,\''.$this->getCtrlName().'/content\');" name="' . SEARCH . '" value="' . Core\Session::GetSearch() . '" placeholder="' . Core\Msg::Get('_SEARCH_', 'Search') . '">';
         print '<input type="hidden" name="' . METHOD . '" value="' . METHOD_SEARCH . '">';
         print '<span class="input-group-btn">';
-        print '<button class="btn btn-default" type="submit">' . Lib\Msg::Get('_SEARCH_', 'Search') . '</button>';
+        print '<button class="btn btn-default" type="submit">' . Core\Msg::Get('_SEARCH_', 'Search') . '</button>';
         print '</span>';
         print '</div>';
         print '</form>';

@@ -10,11 +10,10 @@
  * @copyright  2016 maxkod.pl
  * @version    1.0
  */
-namespace Lib;
+namespace Core;
 
-use Lib\Tools;
-use Model\orderModel;
-use Model\productModel;
+use Core\Tools;
+use Core\View;
 
 class Bootstrap
 {
@@ -33,10 +32,20 @@ class Bootstrap
 
     public function Run($argv)
     {
-		$this->ReadArgv();
+        $this->ReadArgv();
         $this->ReadGet();
+        $this->SetDefaultCtrl();
         $this->CheckCtrlFile();
         $this->LoadController();
+    }
+
+    private function SetDefaultCtrl()
+    {
+        
+        if (empty($this->Ctrl)) 
+        {
+            $this->Ctrl = $this->DefaultCtrl;
+        }
     }
 
     private function ReadArgv()
@@ -55,9 +64,7 @@ class Bootstrap
             return;
         
             $url = ltrim($_GET[URL],"/");
-            //$url = $_GET[URL];
             $array = (explode("/", $url));
-            print_r($array);
 
             foreach($array as $folder)
             {
@@ -80,12 +87,8 @@ class Bootstrap
 
             }
 
-            $nurl = str_replace(strtolower($this->Ctrl), " ",  $url);
-            //print $nurl = ltrim($nurl,"/");
-            @list($this->Method) = explode("/", $nurl);
-
-            print $this->Method;
-        
+            $method = str_replace(strtolower($this->Ctrl), "", $url);
+            $this->Method = trim($method, '/');
     }
 
     private function CheckCtrlFile()
@@ -106,12 +109,12 @@ class Bootstrap
         $ctrl = str_replace("/", "\\", $this->Ctrl); 
         $classname = CTRL_FOLDER. "\\" .$ctrl.'Ctrl';
         $class = new $classname;
-        
+    
         $action = $this->Method;
 		
-        if($action == null)
+        if(is_null($action) || empty($action))
         {
-            $class->index();
+            $class->Index();
             return;
         }
 
@@ -119,12 +122,19 @@ class Bootstrap
 		{
 		    $class->$action();
 		}
+        else
+        {
+            $this->LoadErrorController();
+            exit;
+        }   
 
+        
     }
 
-    private function LoadErrorController($filename)
+    private function LoadErrorController()
     {
-        print '404 Not Found '.$filename;
+        $view = new View('errors/404');
+        $view->Render();
         exit;
     }
 

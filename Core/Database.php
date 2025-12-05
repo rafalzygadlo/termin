@@ -12,7 +12,7 @@
  */
 
 
-namespace Lib;
+namespace Core;
 
 use PDO;
 

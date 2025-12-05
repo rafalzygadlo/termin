@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib;
+namespace Core;
 
 class Msg 
 {
@@ -10,7 +10,7 @@ class Msg
     public static function init()
     {
         //todo session switch
-        $lang = \Lib\Session::getLang();
+        $lang = \Core\Session::getLang();
         self::$msg = json_decode(file_get_contents("Lang/$lang.json"), true);
     }
 
@@ -19,7 +19,7 @@ class Msg
         if(array_key_exists($const,self::$msg))
             return self::$msg[$const];
         else
-            return $const.'*';        
+            return '_'.$const.'_';        
     }
 
 }

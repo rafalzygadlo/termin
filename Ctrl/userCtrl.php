@@ -16,15 +16,15 @@
 namespace Ctrl;
 
 
-use Lib\Ctrl;
-use Lib\Msg;
-use Lib\View;
+use Core\Ctrl;
+use Core\Msg;
+use Core\View;
 use Model\userModel;
 
 
 class userCtrl extends Ctrl 
 {
-    public function index()
+    public function Index()
     {
         $view = new View();
         $view->render('user/index');    

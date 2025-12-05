@@ -14,11 +14,11 @@
 
 namespace Ctrl;
 
-use Lib\Ctrl;
+use Core\Ctrl;
 
 class homeCtrl extends Ctrl
 {
-    public function index()
+    public function Index()
     {
         print '<h1>home</h1>';
         //$alter = new \Libs\Alter();

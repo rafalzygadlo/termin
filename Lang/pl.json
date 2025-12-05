@@ -11,5 +11,10 @@
     "config":"Konfiguracja",
     "admin_panel":"Panel administracyjny",
     "home":"Dom",
-    "footer_copyright":"2021 Wszelkie prawa zastrzeżone.<b> maxkod.pl</b>"
+    "footer_copyright":"2021 Wszelkie prawa zastrzeżone.<b> maxkod.pl</b>",
+    "error_404_title":"Strona nie znaleziona",
+    "error_404_message":"Przepraszamy, żądana strona nie istnieje lub została przeniesiona.",
+    "back":"Wróć",
+    "register":"Zarejestruj się",
+    "logout":"Wyloguj się"
 }
