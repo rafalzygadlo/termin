@@ -21,47 +21,35 @@ class Database extends PDO
 
     private $sth;
     private static $Instance;
-    public $Result = true;
-    public $Exception = false;    
     
     public function __construct()
     {
-		
-        parent::__construct(DB_TYPE . ':host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
-        $this->sth = $this->prepare('SET NAMES utf8');
-        $this->sth->execute();
-    
-    }
-
-    public static function getInstance()
-    {
-        if (!self::$Instance)
+        try 
         {
-            self::$Instance = new Database();
-            //print '<br><br><div class="alert alert-info">Database instance</div>';
-        }
-        return self::$Instance;
+            parent::__construct(DB_TYPE . ':host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
+            $this->sth = $this->prepare('SET NAMES utf8');
+            $this->sth->execute();
+        } 
+        catch (PDOException $e) 
+        {
+            die('Database connection failed: ' . $e->getMessage());
+        }   
+        
     }
 
-    public function Row($sql,$params)
+    public function FetchRow($sql,$params)
     {
         $this->sth = $this->prepare($sql);
         if ($this->sth)
         {
             if ($this->sth->execute($params))
-            { 
-                //if($class)
-                  //  $this->sth->setFetchMode(PDO::FETCH_OBJ);
-                //else
-                    $this->sth->setFetchMode(PDO::FETCH_OBJ);
-                    
+            {                     
+                $this->sth->setFetchMode(PDO::FETCH_OBJ);    
                 return $this->sth->fetch();
-            }else
+            }
+            else
             {
-			    if($this->Exception)
-					$this->Exception('DATABASE ERROR',$sql.'<br>'. $this->sth->errorInfo()[2]);
-				else
-					print $this->sth->errorInfo( )[2];
+				$this->Exception('DATABASE ERROR',$sql.'<br>'. $this->sth->errorInfo()[2]);
             }
         }
         else
@@ -83,10 +71,8 @@ class Database extends PDO
                  return $this->sth->fetch($fetchMode);
             }else
             {
-				if($this->Exception)
+				
 					$this->Exception('DATABASE ERROR',$sql.'<br>'. $this->sth->errorInfo()[2]);
-				else
-					print $this->sth->errorInfo( )[2];
     
             }
         }
@@ -97,23 +83,16 @@ class Database extends PDO
 
     }
     
-    public function MyQuery($sql, $params = null)
+    public function FetchQuery($sql, $params = null)
     {
 		
         $this->sth = $this->prepare($sql);
         if ($this->sth)
         {
             if ($this->sth->execute($params))
-            {
             	return $this->sth;
-
-            }else
-            {
-				if($this->Exception)
-					$this->Exception('DATABASE ERROR',$sql.'<br>'. $this->sth->errorInfo()[2]);
-				else
-					print $this->sth->errorInfo( )[2];
-            }
+            else
+				$this->Exception('DATABASE ERROR',$sql.'<br>'. $this->sth->errorInfo()[2]);
         }
         else
         {
@@ -121,23 +100,19 @@ class Database extends PDO
         }
     }
 
-    public function NonMyQuery($sql, $params)
+    public function FetchNonQuery($sql, $params)
     {
  
         $this->sth = $this->prepare($sql);
         if ($this->sth)
         {
             if ($this->sth->execute($params))
-            {
-                return true;
-            }
+              return true;
+           
             else
-            {
-				if($this->Exception)
-					$this->Exception('DATABASE ERROR',$sql.'<br>'. $this->sth->errorInfo()[2]);
-				else
-					print $this->sth->errorInfo( )[2];
-            }
+           
+				$this->Exception('DATABASE ERROR',$sql.'<br>'. $this->sth->errorInfo()[2]);
+           
         }
         else
         {
@@ -148,7 +123,7 @@ class Database extends PDO
     private function Exception($title,$text)
     {
         $this->Result = false;
-        new myException($title,$text);
+        new myException($title, $text);
     }
     
     public function RowCount()

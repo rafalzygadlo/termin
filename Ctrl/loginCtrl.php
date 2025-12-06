@@ -21,11 +21,7 @@ use Repository\userRepository;
 
 class loginCtrl extends Ctrl
 {
-    public function __construct()
-    {
-        //$this->Email = new Email();
-    }
-
+   
     public function Do()
     {
         
@@ -35,7 +31,7 @@ class loginCtrl extends Ctrl
         //send email
         
         $view = new View();
-        $view->render('login/code1');
+        $view->render('login/code');
     }
 
     public function Index()

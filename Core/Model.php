@@ -15,14 +15,13 @@
 namespace Core;
 
 
-class Model
+class Model extends Database
 {
 
-    public $DB;
-   
+    
     public function __construct()
     {
-        $this->DB = Database::getInstance();
+        parent::__construct(); 
     }
 
     public function GetTitle()
@@ -41,16 +40,5 @@ class Model
         return 0;
     }
     
-
-    public function LastInsertId()
-    {
-        return $this->DB->lastInsertId();
-    }
-
-    public function RowCount()
-    {
-        return $this->DB->RowCount();
-    }
-
 }
 

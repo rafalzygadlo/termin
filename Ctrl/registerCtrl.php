@@ -15,22 +15,13 @@ namespace Ctrl;
 
 use Core\Ctrl;
 use Core\Tool;
-use Model\Register\registerModel;
-use Repository\registerRepository;
+use Model\RegisterModel;
+use View\RegisterView;
 
 class registerCtrl extends Ctrl
 {
   
-    public function ReadData($model)
-    {
-        $data = json_decode(file_get_contents("php://input"));
-        if($data)
-        {
-            $model->getEmail()->setValue($data->email);
-            $model->getPassword()->setValue($data->password);
-        }
-    }
-
+   
     
     public function Insert($model, $key)
     {
@@ -64,30 +55,10 @@ class registerCtrl extends Ctrl
      */    
     public function Index()
     {
-        print 'register endpoint';
-        exit;
       
-        $model = new registerModel();
-        $this->readData($model);
-             
-        $model->getEmail()->getValue();
-                
-      
-        $validator = new \Core\Validator();
-        $validator->add($model->getEmail());
-        $validator->add($model->getPassword());
-        
-        if($validator->run())
-        {
-            $key = Tool::RandomString(64);
-            $this->insert($model, $key);
-            $this->sendEmail($model->getEmail()->getValue(), $key);
-            print json_encode(array("valid" => true,"message" =>"registered"));
-        }
-        else
-        {
-            $validator->JSON();
-        }
+        $model = new RegisterModel();
+        $model->exists('email', 'qotsa@op.pl');
+
         
     }
 
