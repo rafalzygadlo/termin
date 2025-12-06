@@ -24,17 +24,17 @@ class RegisterModel extends Model
 	function __construct()
     {  
         parent::__construct();  
-		
     }
 	 
-    public function exists($column, $value)
+
+    public function Exists($column, $value)
     {
         $sql = "SELECT COUNT(*) FROM {$this->table} WHERE {$column} = ?";
 		$this->fetchRow($sql, [$value]); 
         return  0;
     }
 
-    public function createUser($email, $password)
+    public function CreateUser($email, $password)
     {
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO {$this->table} (email, password) VALUES (?, ?)";
