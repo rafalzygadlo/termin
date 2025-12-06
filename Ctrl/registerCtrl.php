@@ -16,7 +16,7 @@ namespace Ctrl;
 use Core\Ctrl;
 use Core\Tool;
 use Model\RegisterModel;
-use View\RegisterView;
+use Core\View;
 
 class registerCtrl extends Ctrl
 {
@@ -25,8 +25,7 @@ class registerCtrl extends Ctrl
     
     public function Insert($model, $key)
     {
-        $repo = new registerRepository();
-        $repo->registerUser($model,$key);
+       
         
     }
  
@@ -36,28 +35,48 @@ class registerCtrl extends Ctrl
         $email->SendActivationLink($to, $key);
     }
     
-    /*
-     * Endpoint register/confirm
-     * 
-     */
-    public function Confirm()
+
+    private function RenderForm()
     {
-        $key = $_GET['key'];
-        
-        $model = new registerRepository();
-        $model->confirmEmail($key);
-        print 'email confirmed';
+        $view = new View();
+        $view->Render('register/index');
     }
-    
-    /*
-     * Endpoint register
-     * 
-     */    
+
+    public function Do()
+    {
+        $model = new RegisterModel();
+        
+        $email = "qotsa@op.pl";
+        $password = "Tool::GetPost('password')";
+        
+        if($model->Exists('email', $email))
+        {
+            $msg = new \Core\Msg();
+            $msg->AddError('Email already exists');
+            $this->RenderForm();
+            return;
+        }
+        
+        $userId = $model->CreateUser($email, $password);
+        
+        $key = md5(uniqid(rand(), true));
+        $model->SetActivationKey($userId, $key);
+        
+        $this->SendEmail($email, $key);
+        
+        $msg = new \Core\Msg();
+        $msg->AddInfo('Registration successful. Please check your email to activate your account.');
+        
+    }
+   
+  
     public function Index()
     {
       
-        $model = new RegisterModel();
-        $model->exists('email', 'qotsa@op.pl');
+       $this->RenderForm();
+        
+       // $model = new RegisterModel();
+        //$model->Exists('email', 'qotsa@op.pl');
 
         
     }

@@ -15,7 +15,7 @@
 
 namespace Core;
 
-class Tools
+class Tool
 {
 
     public function AsString()

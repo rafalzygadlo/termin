@@ -19,7 +19,7 @@
  
 class RegisterModel extends Model
 {
-	protected $table = "users";
+	protected $table = "user";
     
 	function __construct()
     {  
@@ -29,16 +29,17 @@ class RegisterModel extends Model
 
     public function Exists($column, $value)
     {
-        $sql = "SELECT COUNT(*) FROM {$this->table} WHERE {$column} = ?";
-		$this->fetchRow($sql, [$value]); 
-        return  0;
+        $sql = "SELECT * FROM {$this->table} WHERE {$column} = ?";
+		$result = $this->FetchRow($sql, [$value]);
+        return $this->RowCount();
+
     }
 
     public function CreateUser($email, $password)
     {
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO {$this->table} (email, password) VALUES (?, ?)";
-        return $this->execute($sql, [$email, $hash]);
+        return $this->NonQuery($sql, [$email, $hash]);
     }
 
 }

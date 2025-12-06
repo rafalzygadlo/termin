@@ -1,1 +1,1 @@
-sudo docker exec $1 mariadb -u root --password=pwd db < backup.sql
+sudo docker exec -i termin.mariadb mariadb -u usr --password=pwd db < backup.sql

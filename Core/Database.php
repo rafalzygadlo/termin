@@ -120,11 +120,7 @@ class Database extends PDO
         }
     }
 
-    private function Exception($title,$text)
-    {
-        $this->Result = false;
-        new myException($title, $text);
-    }
+   
     
     public function RowCount()
     {
@@ -137,7 +133,12 @@ class Database extends PDO
         $this->sth->execute($params);
         return $this->sth->fetchColumn();
     }
-
+ 
+    private function Exception($title,$text)
+    {
+        $this->Result = false;
+        new myException($title, $text);
+    }
     
 
 }
