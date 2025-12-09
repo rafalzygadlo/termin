@@ -20,19 +20,19 @@ class Model extends Database
 
     
     public function __construct()
-    {
-        parent::__construct(); 
+    {   
+        parent::__construct();
     }
 
     public function GetTitle()
     {
-        new myException('NOT IMPLEMENTED', __FUNCTION__);
+        throw new myException('NOT IMPLEMENTED', __FUNCTION__);
     }
 
 
     public function Update()
     {
-        new myException('NOT IMPLEMENTED', __FUNCTION__);
+        throw new myException('NOT IMPLEMENTED', __FUNCTION__);
     }
 
     public function CountAll()

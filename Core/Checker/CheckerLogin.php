@@ -9,12 +9,17 @@ class CheckerLogin extends Checker
   
     public function Run($request)
     {
-        print "CheckerLogin Run\n";
+        
+         
         $user = new \Model\UserModel();
-        print_r($user->GetAll());
-        
-        # header('location: /login');   
-        
+        $all = $user->GetAll();
+
+        foreach($all as $u)
+        {               
+            print($u->email);
+            print("<br>");
+        };
+         
            		
     }
 

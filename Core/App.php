@@ -18,21 +18,18 @@ use Core\View;
 class App
 {
     public $Ctrl;
-    public $DefaultCtrl;       
-    public $argv;
+    public $DefaultCtrl;
     public $Method;
     public $Param;
     public $FileName;
     
-    public function __construct($argv = null)
+    public function __construct()
     {
-        $this->argv = $argv;
         $this->DefaultCtrl = DEFAULT_CTRL;
     }
 
-    public function Run($argv)
+    public function Run()
     {
-        $this->ReadArgv();
         $this->ReadGet();
         $this->SetDefaultCtrl();
         $this->CheckCtrlFile();
@@ -48,15 +45,6 @@ class App
         }
     }
 
-    private function ReadArgv()
-    {
-		if(isset($this->argv))
-		{
-		    @list($this->FileName, $this->Ctrl, $this->Method) = $this->argv;	
-		}
-    
-    }
-	
     private function ReadGet()
     {
         // parse z URL

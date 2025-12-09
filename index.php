@@ -24,13 +24,16 @@
     Core\Msg::init();
     //helper functions
     function __($msg){ return Core\Msg::get($msg);  }
-    
-        
-    $app = new Core\App();
-    if(isset($argv))
-        $app->Run($argv);
-    else
-        $app->Run(null);
-    
+ 
+    try
+    {
+        $app = new Core\App();
+        $app->Run();
+    } 
+    catch (Exception $e) 
+    {
+       print "Application error: ".$e->getMessage()."\n";
+       exit(1); 
+   }
 ?>
     
