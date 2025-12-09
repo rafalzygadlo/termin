@@ -31,21 +31,6 @@ class ReportModel extends Model
         return $this->name;
     }
     
-    public function AddItemSql($report_id, $product_id, $product_qt, $record_qt)
-    {
-      //print $report_id."\n";
-      //print $product_id."\n";
-      //print $record_qt."\n";
-      //print $product_qt."\n";
-      
-       $this->sql .= "INSERT INTO maxkod_report_products VALUES('',".$report_id.",".$product_id.",".$product_qt.",".$record_qt.");";
-    }
-    
-    public function RunAddItemSql()
-    {
-        print $this->sql;
-        return $this->DB->NonMyQuery($this->sql, NULL, PDO::FETCH_CLASS, __CLASS__);
-    }
     
     public function Insert()
     {

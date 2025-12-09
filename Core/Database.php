@@ -90,7 +90,7 @@ class Database extends PDO
         if ($this->sth)
         {
             if ($this->sth->execute($params))
-            	return $this->sth;
+                return $this->sth->fetch();
             else
 				$this->Exception('DATABASE ERROR',$sql.'<br>'. $this->sth->errorInfo()[2]);
         }

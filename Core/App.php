@@ -15,7 +15,7 @@ namespace Core;
 use Core\Tools;
 use Core\View;
 
-class Bootstrap
+class App
 {
     public $Ctrl;
     public $DefaultCtrl;       
@@ -114,13 +114,13 @@ class Bootstrap
 		
         if(is_null($action) || empty($action))
         {
-            $class->Index();
+            $class->Run('index');
             return;
         }
 
 		if(method_exists($class, $action))
 		{
-		    $class->$action();
+		    $class->Run($action);
 		}
         else
         {
