@@ -26,7 +26,7 @@
     function __($msg){ return Core\Msg::get($msg);  }
     
         
-    $app = new Core\Bootstrap();
+    $app = new Core\App();
     if(isset($argv))
         $app->Run($argv);
     else

@@ -31,7 +31,7 @@ class loginCtrl extends Ctrl
         //send email
         
         $view = new View();
-        $view->render('login/code');
+        $view->Render('login/code');
     }
 
     public function Index()

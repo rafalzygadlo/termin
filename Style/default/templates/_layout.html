@@ -57,16 +57,26 @@
         
         <!-- Begin page content -->
         
-          <div class="container-fluid">
+          <div class="container-fluid h-100">
            {{content}}
           </div>
-         
-
-          <br>
-          <br>
+        
+          <hr>
         <footer class="footer">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <h1>LOGO</h1>
+              </div>
+              <div class="col">
+                <a href="/faq">FAQ</a><br>
+                <a href="/privacy">Polityka prywatności</a><br>
+                <a href="/terms">Regulamin</a><br>
+              </div>
+            </div>
+          </div>
           <div class="container text-center">
-            <span class="text-center"><?php print __('footer_copyright') ?></span>
+            <span class="text-center"><small><?php print __('footer_copyright') ?></small></span>
           </div>
         </footer>
       <script>

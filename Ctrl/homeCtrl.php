@@ -15,13 +15,13 @@
 namespace Ctrl;
 
 use Core\Ctrl;
+use Core\View;
 
-class homeCtrl extends Ctrl
+class homeCtrl extends authCtrl
 {
     public function Index()
     {
-        print '<h1>home</h1>';
-        //$alter = new \Libs\Alter();
-        //$alter->run();
+        $view = new View();
+        $view->Render('home/index');
     }
 }

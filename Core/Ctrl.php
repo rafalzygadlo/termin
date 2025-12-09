@@ -16,18 +16,33 @@ namespace Core;
 
 abstract class Ctrl
 {
+	private $checkers = array();
 
-    public $Model;
-    public $Ctrl;
+	public function Run($action)
+	{
+		foreach($this->checkers as $checker)
+	    {
+            $checker->Run(NULL);
+	    }
+
+	    $this->$action();
+        
+
+	}
+	
+	public function AddChecker(Checker $checker)
+	{
+		array_push($this->checkers, $checker);
+	}
 
 	public function GetStatus()
 	{	
 		return true;
 	}
 
-	public function index()
+	public function Index()
 	{
-		print '<h1>Base Ctrl index</h1>';
+		print 'Base Ctrl index';
 	}	
 
 }
