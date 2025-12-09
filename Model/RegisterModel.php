@@ -26,10 +26,9 @@ class RegisterModel extends Model
         parent::__construct();  
     }
 	 
-
-    public function Exists($column, $value)
+    public function EmailExists($value)
     {
-        $sql = "SELECT * FROM {$this->table} WHERE {$column} = ?";
+        $sql = "SELECT * FROM {$this->table} WHERE email = ?";
 		$result = $this->FetchRow($sql, [$value]);
         return $this->RowCount();
 

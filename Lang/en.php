@@ -1,0 +1,21 @@
+<?php
+
+return 
+[
+    "manufacturers"=>"Manufacturers",
+    "product"=>"Product",
+    "login"=>"Login",
+    "login_error"=>"Login error",
+    "please_login"=>"Please log in",
+    "work"=>"Work",
+    "account"=>"Account",
+    "time"=>"Time",
+    "days"=>"Days",
+    "config"=>"Config",
+    "admin_panel"=>"Admin panel",
+    "home"=>"Home",
+    "footer_copyright"=>"2021 All rights reserved.<b> maxkod.pl</b>",
+    "error_404_title"=>"Page not found",
+    "error_404_message"=>"Sorry, the requested page does not exist or has been moved.",
+    "back"=>"Back"
+];

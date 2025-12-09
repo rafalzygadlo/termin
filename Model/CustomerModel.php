@@ -27,7 +27,7 @@ class CustomerModel extends Model
     public function All()
     {
         $sql = "SELECT * FROM customers";
-        return $this->DB->MyQuery($sql, NULL, PDO::FETCH_CLASS, __CLASS__);
+        return $this->FetchQuery($sql);
     }
 
 }
