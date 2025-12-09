@@ -133,7 +133,7 @@ class App
 
     private function LoadErrorController()
     {
-        $view = new View('errors/404');
+        $view = new View('errors/404', array(), false, 'errors/_layout.html');
         $view->Render();
         exit;
     }

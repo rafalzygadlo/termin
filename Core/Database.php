@@ -26,7 +26,7 @@ class Database extends PDO
     {
         try 
         {
-            parent::__construct(DB_TYPE . ':host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
+            parent::__construct(DB_TYPE . ':host1=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
             $this->sth = $this->prepare('SET NAMES utf8');
             $this->sth->execute();
         } 

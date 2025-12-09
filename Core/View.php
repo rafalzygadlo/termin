@@ -31,7 +31,11 @@ class View
     private function Include($file)
     {
         extract($this->values);
-        include $this->template_folder."/".$file;
+        $layout = $this->template_folder."/".$file;
+        if(file_exists($layout))
+            include $this->template_folder."/".$file;
+        else
+            die('FILE NOT EXISTS: '. $layout);
     }
 
     private function MinimizeOutput($file)

@@ -7,7 +7,7 @@
         </title>
         <meta charset="utf-8">
         <base href="<?php if (dirname($_SERVER['SCRIPT_NAME']) == '/') print '/'; else print dirname($_SERVER['SCRIPT_NAME']);  ?>">
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="Style/default/css/bootstrap.min.css">
         <link rel="stylesheet" href="icons/bootstrap-icons.css">
         <link rel="stylesheet" href="css/custom.min.css">
         <script src="js/bootstrap.bundle.min.js"></script>  
@@ -35,7 +35,7 @@
 
               <div class="collapse navbar-collapse " id="navbarCollapse">
                 <ul class="navbar-nav ms-auto">
-                  <?php if(app\core\session::get_valid_user()) { ?>
+                  <?php if(Core\Session::getValidUser()) { ?>
                     <li class="nav-item"><a class="nav-link" href="admin/logout"><?php print __('Logout') ?></a></li>                    
                   <?php }else{ ?>
                     <li class="nav-item"><a class="nav-link" href="admin/login"><?php print __('Login') ?></a></li>

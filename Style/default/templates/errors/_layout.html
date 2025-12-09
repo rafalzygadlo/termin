@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            <?php print $_SERVER['SCRIPT_NAME']; ?>
+        </title>
+        <meta charset="utf-8">
+        <base href="<?php if (dirname($_SERVER['SCRIPT_NAME']) == '/') print '/'; else print dirname($_SERVER['SCRIPT_NAME']);  ?>">
+        
+        <link rel="stylesheet" href="Style/default/css/bootstrap.min.css">
+        <link rel="stylesheet" href="Style/default/css/custom.min.css">
+        <link rel="stylesheet" href="icons/bootstrap-icons.css">
+        
+        <script src="js/bootstrap.bundle.min.js"></script>
+        
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+    </head>
+
+    <body class="d-flex flex-column h-100">
+        <!-- Begin page content -->
+          <div class="container-fluid h-100">
+           {{content}}
+          </div>
+        </body>
+</html>
