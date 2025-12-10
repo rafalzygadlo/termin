@@ -5,35 +5,29 @@
     ini_set("display_errors","on");
     error_reporting(E_ALL);
     
-    // autoloader    
-    spl_autoload_extensions(".php");
+    // More reliable autoloader
     spl_autoload_register
     (
         function ($class)
         {
-            $file = str_replace('\\', '/', $class) . '.php';
-            require_once($file);
+            // Use __DIR__ to create an absolute path
+            $base_dir = __DIR__ . '/';
+            $file = str_replace('\\', '/', $class) . '.php'; // Convert namespace to path
+            $path = $base_dir . $file;
+            if (file_exists($path)) {
+                require_once $path;
+            }
         }
     );
-    
-    // begin config files
-    include "Config/system.config.php";
-    include "Config/db.config.php";
-    // end config files
-    
+
     Core\Msg::init();
     //helper functions
     function __($msg){ return Core\Msg::get($msg);  }
  
-    try
-    {
-        $app = new Core\App();
-        $app->Run();
-    } 
-    catch (Exception $e) 
-    {
-       print "Application error: ".$e->getMessage()."\n";
-       exit(1); 
-   }
-?>
+    $app = new Core\App();
+    $app->Run();
+    
+
+// Closing PHP tag is omitted according to good practices (PSR-12)
+
     

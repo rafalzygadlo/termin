@@ -12,7 +12,7 @@
  */
 namespace Core;
 
-use Core\Tools;
+use Config\System;
 use Core\View;
 
 class App
@@ -25,7 +25,7 @@ class App
     
     public function __construct()
     {
-        $this->DefaultCtrl = DEFAULT_CTRL;
+        $this->DefaultCtrl = System::DEFAULT_CTRL;
     }
 
     public function Run()
@@ -48,16 +48,16 @@ class App
     private function ReadGet()
     {
         // parse z URL
-        if(!isset($_GET[URL]))
+        if(!isset($_GET[System::URL]))
             return;
         
-            $url = ltrim($_GET[URL],"/");
+            $url = ltrim($_GET[System::URL],"/");
             $array = (explode("/", $url));
 
             foreach($array as $folder)
             {
                 $dir = ucfirst($folder);
-                if(is_dir(CTRL_FOLDER . '/'. ($dir)))
+                if(is_dir(System::CTRL_FOLDER . '/'. ($dir)))
                 {
                     if(empty($this->Ctrl))
                         $this->Ctrl .= $dir;
@@ -83,7 +83,7 @@ class App
     {
         
         $ctrl = $this->Ctrl;
-        $filename = CTRL_FOLDER . '/'. $ctrl . 'Ctrl.php';
+        $filename = System::CTRL_FOLDER . '/'. $ctrl . 'Ctrl.php';
 
         if (file_exists($filename) == false)
         {
@@ -95,7 +95,7 @@ class App
     private function LoadController()
     {
         $ctrl = str_replace("/", "\\", $this->Ctrl); 
-        $classname = CTRL_FOLDER. "\\" .$ctrl.'Ctrl';
+        $classname = System::CTRL_FOLDER. "\\" .$ctrl.'Ctrl';
         $class = new $classname;
     
         $action = $this->Method;
