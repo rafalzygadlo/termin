@@ -25,12 +25,13 @@ class App
 
     private function CheckCtrlFile(string $controllerName): bool
     {
-        $filename = System::CTRL_FOLDER . '/' . $controllerName . System::CTRL_SUFFIX . '.php';
+        print $filename = System::CTRL_FOLDER . '/' . $controllerName . System::CTRL_SUFFIX . '.php';
         return file_exists($filename);
     }
 
     private function LoadController(Request $request)
     {
+        
         if (!$this->CheckCtrlFile($request->controllerName)) 
         {
             $this->LoadErrorController();
@@ -38,6 +39,7 @@ class App
         }
 
         $ctrl = str_replace("/", "\\", $request->controllerName);
+        //tu poprawic sciezke do kontrolera
         $classname = System::CTRL_FOLDER . '\\' . $ctrl . System::CTRL_SUFFIX;
         $class = new $classname;
 
