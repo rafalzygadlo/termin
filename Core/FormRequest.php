@@ -1,0 +1,66 @@
+<?php
+
+namespace Core;
+
+abstract class FormRequest extends Request
+{
+    protected array $errors = [];
+
+    /**
+     * Defines the validation rules.
+     * Should return an array in the format: ['field' => ['rule1', 'rule2']].
+     * @return array
+     */
+    abstract public function rules(): array;
+
+    /**
+     * Runs the validation process.
+     * @return bool Returns true if validation passes, false otherwise.
+     */
+    public function validate(): bool
+    {
+        foreach ($this->rules() as $field => $rules) {
+            $value = $this->post($field);
+            foreach ($rules as $rule) {
+                // Handle 'required' rule
+                if ($rule === 'required' && empty($value)) {
+                    $this->addError($field, "The {$field} field is required.");
+                }
+
+                // Handle 'email' rule
+                if ($rule === 'email' && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                    $this->addError($field, "The {$field} field must be a valid email address.");
+                }
+
+                // Handle 'min:length' rule
+                if (strpos($rule, 'min:') === 0) {
+                    $minLength = (int) substr($rule, 4);
+                    if (strlen($value) < $minLength) {
+                        $this->addError($field, "The {$field} field must be at least {$minLength} characters.");
+                    }
+                }
+            }
+        }
+
+        return empty($this->errors);
+    }
+
+    /**
+     * Adds an error message for a given field.
+     * @param string $field
+     * @param string $message
+     */
+    protected function addError(string $field, string $message): void
+    {
+        $this->errors[$field][] = $message;
+    }
+
+    /**
+     * Returns the validation errors.
+     * @return array
+     */
+    public function getErrors(): array
+    {
+        return $this->errors;
+    }
+}
