@@ -31,7 +31,8 @@ class App
 
     private function LoadController(Request $request)
     {
-        if (!$this->CheckCtrlFile($request->controllerName)) {
+        if (!$this->CheckCtrlFile($request->controllerName)) 
+        {
             $this->LoadErrorController();
             return;
         }
@@ -42,7 +43,8 @@ class App
 
         $action = $request->actionName;
 
-        if (method_exists($class, $action)) {
+        if (method_exists($class, $action)) 
+        {
             $class->Run($action, $request);
         } else {
             $this->LoadErrorController();

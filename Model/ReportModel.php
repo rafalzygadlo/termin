@@ -31,7 +31,6 @@ class ReportModel extends Model
         return $this->name;
     }
     
-    
     public function Insert()
     {
         $params = array

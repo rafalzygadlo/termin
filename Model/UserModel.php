@@ -26,6 +26,19 @@ class UserModel extends Model
         parent::__construct();  
     }
 	
+    public function Login($username, $password)
+    {
+        
+        $sql = "SELECT * FROM {$this->table} WHERE username=? AND password=? LIMIT 1";
+        $result = $this->FetchQuery($sql, [$username, md5($password)]);
+        
+        if(count($result) > 0)
+            return $result;
+        else   
+            return false;
+        
+    }  
+
     public function GetAll()
     {
         $sql = "SELECT * FROM {$this->table}";

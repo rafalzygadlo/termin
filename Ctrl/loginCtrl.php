@@ -22,14 +22,16 @@ use Repository\userRepository;
 class loginCtrl extends Ctrl
 {
    
-    public function Do()
+    public function Do(Request $request)
     {
         
         //check email
 
         //generate code
         //send email
-        
+        $username = $request->Get('user');
+        $password = $request->Get('password');
+        UserModel->Login($username, $password);   
         $view = new View();
         $view->Render('login/code');
     }
