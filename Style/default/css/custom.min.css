@@ -4,9 +4,7 @@ html {
 
 body {
     padding-top:100px;
-    margin-bottom: 30px;
-    
-}
+  }
 
 body>.navbar{
     -webkit-transition:background-color .3s ease-in;

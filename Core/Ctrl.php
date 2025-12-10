@@ -18,16 +18,13 @@ abstract class Ctrl
 {
 	private $checkers = array();
 
-	public function Run($action)
+	public function Run(string $action, Request $request)
 	{
 		foreach($this->checkers as $checker)
 	    {
-            $checker->Run(NULL);
+            $checker->Run($request);
 	    }
-
-	    $this->$action();
-        
-
+	    $this->$action($request);
 	}
 	
 	public function AddChecker(Checker $checker)

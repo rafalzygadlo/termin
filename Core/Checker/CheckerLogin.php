@@ -2,25 +2,19 @@
 
 namespace Core\Checker;
 
+use Core\Request;
 use Core\Checker;
+use Core\Session;
 
 class CheckerLogin extends Checker
 {
   
-    public function Run($request)
-    {
+    public function Run(Request $request)
+    {         
+        if(Session::getValidUser())
+            return;
         
-         
-        $user = new \Model\UserModel();
-        $all = $user->GetAll();
-
-        foreach($all as $u)
-        {               
-            print($u->email);
-            print("<br>");
-        };
-         
-           		
+        header('location: /login');
     }
 
 }

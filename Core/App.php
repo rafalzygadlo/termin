@@ -17,106 +17,36 @@ use Core\View;
 
 class App
 {
-    public $Ctrl;
-    public $DefaultCtrl;
-    public $Method;
-    public $Param;
-    public $FileName;
-    
-    public function __construct()
-    {
-        $this->DefaultCtrl = System::DEFAULT_CTRL;
-    }
-
     public function Run()
     {
-        $this->ReadGet();
-        $this->SetDefaultCtrl();
-        $this->CheckCtrlFile();
-        $this->LoadController();
+        $request = new Request();
+        $this->LoadController($request);
     }
 
-    private function SetDefaultCtrl()
+    private function CheckCtrlFile(string $controllerName): bool
     {
-        
-        if (empty($this->Ctrl)) 
-        {
-            $this->Ctrl = $this->DefaultCtrl;
-        }
+        $filename = System::CTRL_FOLDER . '/' . $controllerName . System::CTRL_SUFFIX . '.php';
+        return file_exists($filename);
     }
 
-    private function ReadGet()
+    private function LoadController(Request $request)
     {
-        // parse z URL
-        if(!isset($_GET[System::URL]))
-            return;
-        
-            $url = ltrim($_GET[System::URL],"/");
-            $array = (explode("/", $url));
-
-            foreach($array as $folder)
-            {
-                $dir = ucfirst($folder);
-                if(is_dir(System::CTRL_FOLDER . '/'. ($dir)))
-                {
-                    if(empty($this->Ctrl))
-                        $this->Ctrl .= $dir;
-                    else
-                        $this->Ctrl .= '/'.$dir;
-                }
-                else
-                {
-                    if(empty($this->Ctrl))
-                        $this->Ctrl .= $folder;
-                    else
-                        $this->Ctrl .= '/'.$folder;
-                    break;
-                }
-
-            }
-
-            $method = str_replace(strtolower($this->Ctrl), "", $url);
-            $this->Method = trim($method, '/');
-    }
-
-    private function CheckCtrlFile()
-    {
-        
-        $ctrl = $this->Ctrl;
-        $filename = System::CTRL_FOLDER . '/'. $ctrl . 'Ctrl.php';
-
-        if (file_exists($filename) == false)
-        {
-            $this->LoadErrorController($filename);
-        }
-
-    }
-
-    private function LoadController()
-    {
-        $ctrl = str_replace("/", "\\", $this->Ctrl); 
-        $classname = System::CTRL_FOLDER. "\\" .$ctrl.'Ctrl';
-        $class = new $classname;
-    
-        $action = $this->Method;
-		
-        if(is_null($action) || empty($action))
-        {
-            $class->Run('index');
-            return;
-        }
-
-		if(method_exists($class, $action))
-		{
-		    $class->Run($action);
-		}
-        else
-        {
+        if (!$this->CheckCtrlFile($request->controllerName)) {
             $this->LoadErrorController();
-            exit;
-        }   
+            return;
+        }
 
-        
+        $ctrl = str_replace("/", "\\", $request->controllerName);
+        $classname = System::CTRL_FOLDER . '\\' . $ctrl . System::CTRL_SUFFIX;
+        $class = new $classname;
+
+        $action = $request->actionName;
+
+        if (method_exists($class, $action)) {
+            $class->Run($action, $request);
+        } else {
+            $this->LoadErrorController();
+        }
     }
 
     private function LoadErrorController()
@@ -125,6 +55,4 @@ class App
         $view->Render();
         exit;
     }
-
-
 }

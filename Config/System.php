@@ -17,4 +17,5 @@ class System
     public const METHOD = "method";
     public const URL = "url";
     public const CTRL_FOLDER = 'Ctrl';
+    public const CTRL_SUFFIX = 'Ctrl';
 }

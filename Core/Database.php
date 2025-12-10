@@ -15,7 +15,7 @@
 namespace Core;
 
 use PDO;
-
+use Config\Db;
 class Database extends PDO
 {
 
@@ -24,7 +24,7 @@ class Database extends PDO
     
     public function __construct()
     {
-        parent::__construct(DB_TYPE . ':host=' . DB_HOST . ';dbname=' . DB_NAME,  DB_USER, DB_PASSWORD);
+        parent::__construct(Db::TYPE . ':host=' . Db::HOST . ';dbname=' . Db::NAME,  Db::USER, Db::PASSWORD);
         $this->exec('SET NAMES utf8');
     }
 
@@ -38,10 +38,6 @@ class Database extends PDO
                 $this->sth->setFetchMode(PDO::FETCH_OBJ);    
                 return $this->sth->fetch();
             }
-            //else
-            //{
-			//	throw new myException('DATABASE ERROR',$sql.'<br>'. $this->sth->errorInfo()[2]);
-            //}
         }
         else
         {
@@ -59,10 +55,6 @@ class Database extends PDO
         {
             if ($this->sth->execute())
                 return $this->sth->fetch($fetchMode);
-            //}else
-            //{
-			//	throw new myException('DATABASE ERROR',$sql.'<br>'. $this->sth->errorInfo()[2]);
-            //}
         }
         else
         {
@@ -75,20 +67,18 @@ class Database extends PDO
     {
 		
         $this->sth = $this->prepare($sql);
-        //if ($this->sth)
-        //{
+        if ($this->sth)
+        {
             if ($this->sth->execute($params))
                 return $this->sth->fetchAll($fetchMode);
-            //else
-				//throw new myException('DATABASE ERROR',$sql.'<br>'. $this->sth->errorInfo()[2]);
-        //}
-        //else
-        //{
-          //  return false;
-        //}
+        }
+        else
+        {
+            return false;
+        }
     }
 
-    public function FetchNonQuery($sql, $params)
+    public function ExecuteQuery($sql, $params)
     {
  
         $this->sth = $this->prepare($sql);
@@ -96,8 +86,6 @@ class Database extends PDO
         {
             if ($this->sth->execute($params))
                 return true;
-           //else
-             //   throw  new myException('DATABASE ERROR',$sql.'<br>'. $this->sth->errorInfo()[2]);
         }
         else
         {
@@ -114,8 +102,16 @@ class Database extends PDO
     public function Count($sql, $params)
     {
         $this->sth = $this->prepare($sql);
-        $this->sth->execute($params);
-        return $this->sth->fetchColumn();
+        if( $this->sth ) 
+        {       
+            $this->sth->execute($params);
+            return $this->sth->fetchColumn();
+        }
+        else
+        {
+            return false;
+        }
+        
     }
  
 
