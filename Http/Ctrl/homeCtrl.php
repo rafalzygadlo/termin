@@ -18,7 +18,7 @@ use Core\Ctrl;
 use Core\View;
 use Core\Request;
 
-class homeCtrl extends authCtrl
+class homeCtrl extends Ctrl
 {
     
     public function index()
