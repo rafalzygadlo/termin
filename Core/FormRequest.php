@@ -39,6 +39,18 @@ abstract class FormRequest extends Request
                         $this->addError($field, "The {$field} field must be at least {$minLength} characters.");
                     }
                 }
+                // Handle 'unique:table,column' rule
+                if (strpos($rule, 'unique:') === 0) {
+                    // parsujemy tabelę i kolumnę
+                    list($table, $column) = explode(',', substr($rule, 7));
+
+                    $stmt = $this->db->prepare("SELECT id FROM {$table} WHERE {$column} = ?");
+                    $stmt->execute([$value]);
+                    if ($stmt->rowCount() > 0) {
+                        $this->addError($field, "The {$field} has already been taken.");
+                    }
+                }
+
             }
         }
 

@@ -14,6 +14,9 @@
 
 namespace Core;
 
+use Core\Request;
+use Core\Checker;
+
 abstract class Ctrl
 {
 	private $checkers = array();

@@ -17,7 +17,7 @@ use Core\Ctrl;
 use Core\Request;
 use Model\RegisterModel;
 use Core\View;
-use Http\Requests\RegisterRequest;
+use Http\Request\RegisterRequest;
 
 class registerCtrl extends Ctrl
 {
@@ -54,7 +54,8 @@ class registerCtrl extends Ctrl
     public function do(Request $request)
     {
         $registerRequest = new RegisterRequest();
-        if (!$registerRequest->validate()) {
+        if (!$registerRequest->validate()) 
+        {
             // If validation fails, re-render the form with errors and old input
             $this->renderRegistrationForm([
                 'errors' => $registerRequest->getErrors(),
@@ -91,6 +92,9 @@ class registerCtrl extends Ctrl
      */
     public function index()
     {
-       $this->renderRegistrationForm();
+       $this->renderRegistrationForm([
+                'errors' => array(),
+                'old' => array()
+            ]);;
     }
 }

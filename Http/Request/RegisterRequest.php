@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Requests;
+namespace Http\Request;
 
 use Core\FormRequest;
 
@@ -12,7 +12,7 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email','unique:user,email'],
             'password' => ['required', 'min:8'],
         ];
     }
