@@ -11,13 +11,13 @@
  * @version    1.0
  */
 
-namespace Ctrl;
+namespace Http\Ctrl;
 
 use Core\Ctrl;
 use Core\View;
 use Core\Email;
 use Core\Checker\CheckerLogin;
-use Repository\userRepository;
+use Model\UserModel;
 
 class loginCtrl extends Ctrl
 {

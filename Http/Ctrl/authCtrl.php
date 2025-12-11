@@ -10,7 +10,7 @@
  * @version    1.0
  */
 
-namespace Ctrl;
+namespace Http\Ctrl;
 
 use Core\Ctrl;
 use Core\Checker\CheckerLogin;

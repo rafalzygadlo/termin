@@ -5,7 +5,7 @@
  * 
  * @category   Libs
  * @package    CMS
- * @author     Rafał Żygadło <rafal@maxkod.pl>
+ * @author     rafal zygadlo <rafal@maxkod.pl>
  
  * @copyright  2016 maxkod.pl
  * @version    1.0
@@ -17,40 +17,35 @@ use Core\View;
 
 class App
 {
+    protected string $controllerClass;
+    protected string $actionName;
+    protected Request $request;
+
     public function Run()
     {
-        $request = new Request();
-        $this->LoadController($request);
-    }
-
-    private function CheckCtrlFile(string $controllerName): bool
-    {
-        print $filename = System::CTRL_FOLDER . '/' . $controllerName . System::CTRL_SUFFIX . '.php';
-        return file_exists($filename);
+        $this->request = new Request();
+        $this->actionName = $this->request->actionName;
+        $ctrlFolder = str_replace("/", "\\", System::CTRL_FOLDER);
+        $this->controllerClass = $ctrlFolder . '\\' . str_replace("/", "\\", $this->request->controllerName) . System::CTRL_SUFFIX;
+        
+        $this->LoadController($this->request);
     }
 
     private function LoadController(Request $request)
     {
         
-        if (!$this->CheckCtrlFile($request->controllerName)) 
+        if (!class_exists($this->controllerClass)) 
         {
             $this->LoadErrorController();
             return;
         }
+     
+        $controller = new $this->controllerClass;
 
-        $ctrl = str_replace("/", "\\", $request->controllerName);
-        //tu poprawic sciezke do kontrolera
-        $classname = System::CTRL_FOLDER . '\\' . $ctrl . System::CTRL_SUFFIX;
-        $class = new $classname;
-
-        $action = $request->actionName;
-
-        if (method_exists($class, $action)) 
-        {
-            $class->Run($action, $request);
-        } else {
+        if (method_exists($controller, $this->actionName)) 
+           $controller->Run($this->actionName, $this->request);
+         else 
             $this->LoadErrorController();
-        }
     }
 
     private function LoadErrorController()

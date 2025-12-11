@@ -12,7 +12,7 @@
  */
 
 
-namespace Ctrl;
+namespace Http\Ctrl;
 
 use Core\Ctrl;
 use Core\View;
