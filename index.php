@@ -6,11 +6,8 @@
     error_reporting(E_ALL);
     
     require __DIR__ . '/autoload.php';
+    require __DIR__ . '/helper.php';
 
-    Core\Msg::init();
-    //helper functions
-    function __($msg){ return Core\Msg::get($msg);  }
-    
     //application start
     (new Core\App())->Run();
     
