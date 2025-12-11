@@ -24,7 +24,7 @@ class Session
          
          //print 'no lang';
           //e/xit;
-            return 'pl';
+            return 'en';
 
         }
     }
