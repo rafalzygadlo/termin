@@ -38,3 +38,6 @@ RUN mv composer.phar /usr/local/bin/composer
 #RUN apt-get install phpunit
 COPY php.ini /usr/local/etc/php/php.ini-production
 COPY php.ini /usr/local/etc/php/php.ini-development
+#phpunit
+RUN composer global require phpunit/phpunit \
+    && ln -s /root/.composer/vendor/bin/phpunit /usr/local/bin/phpunit

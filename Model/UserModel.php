@@ -29,7 +29,7 @@ class UserModel extends Model
     public function Login($username, $password)
     {
         
-        $sql = "SELECT * FROM {$this->table} WHERE username=? AND password=? LIMIT 1";
+        $sql = "SELECT * FROM {$this->table} WHERE email=? AND password=? LIMIT 1";
         $result = $this->FetchQuery($sql, [$username, md5($password)]);
         
         if(count($result) > 0)
