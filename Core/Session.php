@@ -8,7 +8,7 @@ class Session
 
     //GET
 
-    public static function getCtrl()
+    public static function GetCtrl()
     {
         if(isset($_SESSION['ctrl']))
             return $_SESSION['ctrl'];
@@ -16,7 +16,7 @@ class Session
             return DEFAULT_CTRL;
     }
 
-    public static function getLang()
+    public static function GetLang()
     {
         if(isset($_SESSION['lang']))
             return $_SESSION['lang'];
@@ -29,7 +29,7 @@ class Session
         }
     }
 
-    public static function getValidUser()
+    public static function GetValidUser()
     {
         if(isset($_SESSION['valid_user']))
             return $_SESSION['valid_user'];
@@ -38,7 +38,7 @@ class Session
         
     }
     
-    public static function getUser()
+    public static function GetUser()
     {
         if(isset($_SESSION['user']))
             return $_SESSION['user'];
@@ -47,18 +47,18 @@ class Session
     }
     
 
-    public static function setCtrl($value)
+    public static function SetCtrl($value)
     {
         $_SESSION['ctrl'] = $value;
     }
 
     
-    public static function setValidUser($value)    
+    public static function SetValidUser($value)    
     {
         $_SESSION['valid_user'] = $value;    
     }
     
-    public static function setUser($value)
+    public static function SetUser($value)
     {
         $_SESSION['user'] = $value;
     }

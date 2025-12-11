@@ -17,7 +17,7 @@ abstract class FormRequest extends Request
      * Runs the validation process.
      * @return bool Returns true if validation passes, false otherwise.
      */
-    public function validate(): bool
+    public function Validate(): bool
     {
         foreach ($this->rules() as $field => $rules) {
             $value = $this->post($field);
@@ -62,7 +62,7 @@ abstract class FormRequest extends Request
      * @param string $field
      * @param string $message
      */
-    protected function addError(string $field, string $message): void
+    protected function AddError(string $field, string $message): void
     {
         $this->errors[$field][] = $message;
     }
@@ -71,7 +71,7 @@ abstract class FormRequest extends Request
      * Returns the validation errors.
      * @return array
      */
-    public function getErrors(): array
+    public function GetErrors(): array
     {
         return $this->errors;
     }

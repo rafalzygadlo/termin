@@ -7,14 +7,14 @@ class Msg
 
     private static $msg;
 
-    public static function init()
+    public static function Init()
     {
         //todo session switch
         $lang = \Core\Session::getLang();
         self::$msg = require("Lang/$lang.php");
     }
 
-    public static function get($const)
+    public static function Get($const)
     {
         
         if(array_key_exists($const,self::$msg))

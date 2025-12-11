@@ -12,10 +12,10 @@ class Request
 
     public function __construct()
     {
-        $this->parseUrl();
+        $this->ParseUrl();
     }
 
-    private function parseUrl(): void
+    private function ParseUrl(): void
     {
         if (!isset($_GET[System::URL])) {
             $this->controllerName = System::DEFAULT_CTRL;
@@ -69,12 +69,12 @@ class Request
         }
     }
 
-    public function get(string $key, $default = null)
+    public function Get(string $key, $default = null)
     {
         return $_GET[$key] ?? $default;
     }
 
-    public function post(string $key, $default = null)
+    public function Post(string $key, $default = null)
     {
         return $_POST[$key] ?? $default;
     }

@@ -18,25 +18,26 @@ use Core\View;
 use Core\Email;
 use Core\Checker\CheckerLogin;
 use Model\UserModel;
+use Core\Request;
 
 class loginCtrl extends Ctrl
 {
    
-    public function Do(Request $request)
+    public function do(Request $request)
     {
         
         //check email
 
         //generate code
         //send email
+        $request->Validate();
         $username = $request->Get('user');
         $password = $request->Get('password');
-        UserModel->Login($username, $password);   
-        $view = new View();
-        $view->Render('login/code');
+        (new UserModel)->Login($username, $password);   
+        $this->redirect('/dashboard');
     }
 
-    public function Index()
+    public function index()
     {	   
         $view = new View();
         $view->Render('login/index');

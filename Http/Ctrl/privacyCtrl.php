@@ -12,15 +12,10 @@
  */
 
 
-
 namespace Ctrl;
 
-
 use Core\Ctrl;
-
 use Core\View;
-
-
 
 class privacyCtrl extends Ctrl 
 {

@@ -35,14 +35,5 @@ abstract class Ctrl
 		array_push($this->checkers, $checker);
 	}
 
-	public function GetStatus()
-	{	
-		return true;
-	}
-
-	public function Index()
-	{
-		print 'Base Ctrl index';
-	}	
 
 }

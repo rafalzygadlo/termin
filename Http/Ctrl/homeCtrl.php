@@ -21,14 +21,7 @@ use Core\Request;
 class homeCtrl extends authCtrl
 {
     
-    public function edit(Request $request)
-    {
-        $view = new View();
-        $view->Render('home/index');
-    }
-    
-    
-    public function Index()
+    public function index()
     {
         $view = new View();
         $view->Render('home/index');

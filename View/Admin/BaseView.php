@@ -3,7 +3,7 @@
 namespace View\Admin;
 use Core\View;
 
-class baseView extends View
+class BaseView extends View
 {
     
     public function __construct()
