@@ -1,6 +1,7 @@
 <?php
 
-namespace Core;
+namespace Core\Request;
+use Core\Validator;
 
 abstract class FormRequest extends Request
 {
@@ -13,10 +14,23 @@ abstract class FormRequest extends Request
      */
     abstract public function rules(): array;
 
+    public function validate(): array|false 
+    {
+        $validator = new Validator($this->post(), $this->rules());
+
+        if (!$validator->validate()) 
+        {
+        return false;
+        }
+
+        return $this->post();
+    }
+
     /**
      * Runs the validation process.
      * @return bool Returns true if validation passes, false otherwise.
      */
+    /*
     public function Validate(): bool
     {
         foreach ($this->rules() as $field => $rules) {
@@ -56,7 +70,7 @@ abstract class FormRequest extends Request
 
         return empty($this->errors);
     }
-
+    */
     /**
      * Adds an error message for a given field.
      * @param string $field

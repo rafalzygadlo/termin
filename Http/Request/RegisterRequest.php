@@ -2,7 +2,7 @@
 
 namespace Http\Request;
 
-use Core\FormRequest;
+use Core\Request\FormRequest;
 
 class RegisterRequest extends FormRequest
 {
