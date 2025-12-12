@@ -3,7 +3,16 @@
   <h1>Login</h1>
   <div class="row">
     <div class="col">
-      <br>
+      <?php if (!empty($errors)): ?>
+        <div class="alert alert-danger">
+          <ul>
+            <?php foreach ($errors as $error): ?>
+              <li><?php print $error; ?></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      <?php endif; ?>
+    
       <!--
       <h2 >Witaj w królestwie bolesławieckich absurdów!</h2>
         <p>Tutaj możesz dodawać własne newsy o Bolesławcu i powiecie bolesławieckim — im bardziej absurdalne i zabawne, tym lepiej! Krasnale, kaczki, pierogi, mosty zamienione w tory wyścigowe… wszystko jest mile widziane.</p>
@@ -30,8 +39,8 @@
           </div>
       
           <div class="form-floating mb-3">
-            <input type="password" name="password" class="form-control form-control-lg" placeholder="password" value="123"> 
-            <label for="floatingInput">password</label>
+            <input type="password" name="password" class="form-control form-control-lg" placeholder="password" value="<?php $old->password ?? '' ?>"> 
+            <label for="floatingInput"> <?php __('password'); ?></label>
           </div>
       
           <div class="form-check mb-3">

@@ -26,14 +26,14 @@ class loginCtrl extends Ctrl
     public function do(Request $request)
     {
         
-        //check email
+        $credentials = $request->validate
+        ([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        //generate code
-        //send email
-        $request->Validate();
-        $username = $request->Get('user');
-        $password = $request->Get('password');
         (new UserModel)->Login($username, $password);   
+        
         $this->redirect('/dashboard');
     }
 

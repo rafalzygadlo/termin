@@ -14,7 +14,7 @@ namespace Core;
 
 use Config\System;
 use Core\View;
-
+use Core\Request;
 class App
 {
     protected string $controllerClass;

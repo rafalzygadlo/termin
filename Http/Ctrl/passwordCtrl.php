@@ -7,6 +7,7 @@ use Model\PasswordReset;
 use Core\Ctrl;
 use Core\Msg;
 use Core\Database; 
+use App\Service\MailerService;
 
 // Zakładam, że masz bazowy kontroler, z którego możesz dziedziczyć
 class PasswordCtrl extends Ctrl
