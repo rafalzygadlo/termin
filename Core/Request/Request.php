@@ -17,7 +17,8 @@ class Request
 
     private function ParseUrl(): void
     {
-        if (!isset($_GET[System::URL])) {
+        if (!isset($_GET[System::URL])) 
+        {
             $this->controllerName = System::DEFAULT_CTRL;
             $this->actionName = 'index';
             return;
@@ -30,6 +31,7 @@ class Request
         // Find controller path
         $path = '';
         $pathParts = [];
+        
         foreach ($urlParts as $part) 
         {
             $tempPath = $path . ucfirst($part);
@@ -37,7 +39,9 @@ class Request
             {
                 $path = $tempPath . '/';
                 $pathParts[] = $part;
-            } else {
+            } 
+            else 
+            {
                 break;
             }
         }
@@ -45,26 +49,22 @@ class Request
         $remainingParts = array_slice($urlParts, count($pathParts));
         
         // Controller
-        if (isset($remainingParts[0]) && !empty($remainingParts[0])) {
+        if (isset($remainingParts[0]) && !empty($remainingParts[0])) 
             $this->controllerName = ltrim($path, '/') . $remainingParts[0];
-        } else {
-            // If the path points to a directory, but no controller is specified,
-            // try to use the default controller within that directory.
-            // e.g. /admin/ -> Admin/Index
+        else 
             $this->controllerName = rtrim($path, '/') . System::DEFAULT_CTRL;
-            // If the resulting controller file doesn't exist, it will be handled as a 404 by the Dispatcher.
-            // This handles the case where a URL is just a directory name.
-        }
+        
 
         // Action
-        if (isset($remainingParts[1]) && !empty($remainingParts[1])) {
+        if (isset($remainingParts[1]) && !empty($remainingParts[1])) 
             $this->actionName = $remainingParts[1];
-        } else {
+        else 
             $this->actionName = 'index';
-        }
+        
 
         // Params
-        if (count($remainingParts) > 2) {
+        if (count($remainingParts) > 2) 
+        {
             $this->params = array_slice($remainingParts, 2);
         }
     }
