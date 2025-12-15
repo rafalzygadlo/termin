@@ -22,7 +22,7 @@ use Core\View;
 use Model\userModel;
 
 
-class userCtrl extends Ctrl 
+class userCtrl extends authCtrl 
 {
     public function Index()
     {

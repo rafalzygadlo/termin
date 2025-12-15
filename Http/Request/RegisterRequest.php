@@ -2,9 +2,9 @@
 
 namespace Http\Request;
 
-use Core\Request\FormRequest;
+use Core\Request;
 
-class RegisterRequest extends FormRequest
+class RegisterRequest extends Request
 {
     /**
      * @inheritDoc

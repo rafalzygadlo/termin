@@ -12,15 +12,15 @@
  */
 
 
-namespace Ctrl\Admin;
+namespace Http\Ctrl\Admin;
 
 use Core\Ctrl;
 use Ctrl\Admin\authCtrl;
 
 
-class homeCtrl extends authCtrl
+class homeCtrl extends Ctrl
 {
-    public function Index()
+    public function index()
     {
         $view = new \View\Admin\homeView();
         $view->Render('admin/home/index');

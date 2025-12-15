@@ -3,6 +3,6 @@ Core\Msg::init();
 
 function __($msg)
 {
-    print Core\Msg::get($msg);
+    return Core\Msg::Get($msg);
 }
 // Closing PHP tag is omitted according to good practices (PSR-12)Core\Msg::init();

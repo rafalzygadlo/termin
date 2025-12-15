@@ -1,66 +1,67 @@
 <?php
 
- 
 namespace Core;
  
 class Session
 {
+    protected const FLASH_KEY = 'flash_messages';
 
-    //GET
-
-    public static function GetCtrl()
+    /**
+     * Starts the session if it's not already started.
+     */
+    public static function start()
     {
-        if(isset($_SESSION['ctrl']))
-            return $_SESSION['ctrl'];
-        else
-            return DEFAULT_CTRL;
-    }
-
-    public static function GetLang()
-    {
-        if(isset($_SESSION['lang']))
-            return $_SESSION['lang'];
-        else{
-         
-         //print 'no lang';
-          //e/xit;
-            return 'en';
-
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
         }
     }
 
-    public static function GetValidUser()
+    /**
+     * Sets a value in the session.
+     * @param string $key
+     * @param mixed $value
+     */
+    public static function set(string $key, $value)
     {
-        if(isset($_SESSION['valid_user']))
-            return $_SESSION['valid_user'];
-        else
-            return false;
-        
-    }
-    
-    public static function GetUser()
-    {
-        if(isset($_SESSION['user']))
-            return $_SESSION['user'];
-        else
-            return false;
-    }
-    
-
-    public static function SetCtrl($value)
-    {
-        $_SESSION['ctrl'] = $value;
+        self::start();
+        $_SESSION[$key] = $value;
     }
 
-    
-    public static function SetValidUser($value)    
+    /**
+     * Gets a value from the session.
+     * @param string $key
+     * @param mixed $default
+     * @return mixed
+     */
+    public static function get(string $key, $default = null)
     {
-        $_SESSION['valid_user'] = $value;    
+        self::start();
+        return $_SESSION[$key] ?? $default;
     }
-    
-    public static function SetUser($value)
+
+    /**
+     * Sets a "flash" message that will be available only for the next request.
+     * @param string $key
+     * @param mixed $value
+     */
+    public static function flash(string $key, $value)
     {
-        $_SESSION['user'] = $value;
+        self::start();
+        $_SESSION[self::FLASH_KEY][$key] = $value;
+    }
+
+    /**
+     * Gets a "flash" message and removes it from the session.
+     * @param string $key
+     * @param mixed $default
+     * @return mixed
+     */
+    public static function getFlash(string $key, $default = null)
+    {
+        self::start();
+        $message = $_SESSION[self::FLASH_KEY][$key] ?? $default;
+        unset($_SESSION[self::FLASH_KEY][$key]);
+        return $message;
     }
             
 }

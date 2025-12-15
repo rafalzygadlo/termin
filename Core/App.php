@@ -14,7 +14,7 @@ namespace Core;
 
 use Config\System;
 use Core\View;
-use Core\Request\Request;
+use Core\Request;
 
 class App
 {
@@ -22,19 +22,26 @@ class App
     protected string $actionName;
     protected Request $request;
 
-    public function Run()
+    public function Run($routes)
     {
         $this->request = new Request();
-        $this->actionName = $this->request->actionName;
-        $ctrlFolder = str_replace("/", "\\", System::CTRL_FOLDER);
-        $this->controllerClass = $ctrlFolder . '\\' . str_replace("/", "\\", $this->request->controllerName) . System::CTRL_SUFFIX;
         
-        $this->LoadController($this->request);
+        $uri = $this->request->getUri();
+        $method = $this->request->getMethod();
+
+        if (isset($routes[$method][$uri])) 
+        {
+            [$controller, $action] = $routes[$method][$uri];
+            $this->controllerClass = $controller;
+            $this->actionName = $action;
+            $this->LoadController($this->request);
+        } else {
+            $this->LoadErrorController();
+        }
     }
 
     private function LoadController(Request $request)
     {
-        
         if (!class_exists($this->controllerClass)) 
         {
             $this->LoadErrorController();

@@ -35,5 +35,9 @@ abstract class Ctrl
 		array_push($this->checkers, $checker);
 	}
 
-
+	public function Redirect(string $url)
+	{
+		header("Location: $url");
+		exit();
+	}
 }

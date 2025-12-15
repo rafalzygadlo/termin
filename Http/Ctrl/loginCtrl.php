@@ -17,32 +17,48 @@ use Core\Ctrl;
 use Core\View;
 use Core\Email;
 use Core\Checker\CheckerLogin;
+use Core\Session;
 use Model\UserModel;
 use Core\Request;
+use Http\Request\LoginRequest;
 
 class loginCtrl extends Ctrl
 {
    
-    public function do(Request $request)
+    public function do()
     {
-        
-        $credentials = $request->validate
-        ([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $request = new LoginRequest();
+        $credentials = $request->Validate($request->rules());
 
-        (new UserModel)->Login($username, $password);   
-        
-        $this->redirect('/dashboard');
+        // If validation fails, $credentials will be empty
+        if (empty($credentials)) 
+        {
+            Session::flash('errors', $request->getErrors());
+            Session::flash('old', $_POST);
+            $this->redirect('/login');
+        }
+
+        if ((new UserModel)->Login($credentials['email'], $credentials['password'])) 
+        {
+            // On successful login, regenerate session ID to prevent session fixation
+            session_regenerate_id(true);
+            $this->Redirect('/dashboard');
+        }
+
+        // Handle failed login (wrong credentials)
+        Session::flash('errors', ['general' => ['Nieprawidłowy email lub hasło.']]);
+        Session::flash('old', $_POST);
+        $this->redirect('/login');
     }
 
     public function index()
     {	   
-        $view = new View();
-        $view->Render('login/index');
+        $errors = Session::getFlash('errors', []);
+        $old = Session::getFlash('old', []);
+
+        $view = new View('login/index', ['errors' => $errors, 'old' => $old]);
+        $view->Render();
           
     }
     
 }
-

@@ -10,8 +10,9 @@ class Msg
     public static function Init()
     {
         //todo session switch
-        $lang = \Core\Session::getLang();
-        self::$msg = require("Lang/$lang.php");
+        // Use the new generic 'get' method with a default value
+        $lang = \Core\Session::get('lang', 'en'); 
+        self::$msg = require(__DIR__ . "/../Lang/$lang.php");
     }
 
     public static function Get($const)

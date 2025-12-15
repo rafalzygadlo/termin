@@ -6,70 +6,19 @@ use Config\System;
 
 class Request
 {
-    public string $controllerName;
-    public string $actionName;
-    public array $params = [];
-    protected array $errors = [];
-    public array $rules = [];
+    protected ?Validator $validator = null;
 
-
-    public function __construct()
+    public function getUri(): string
     {
-        $this->ParseUrl();
+        $uri = $_GET[System::URL] ?? '/';
+        $uri = rtrim($uri, '/');
+        $uri = filter_var($uri, FILTER_SANITIZE_URL);
+        return $uri === '' ? '/' : $uri;
     }
 
-    private function ParseUrl(): void
+    public function getMethod(): string
     {
-        if (!isset($_GET[System::URL])) 
-        {
-            $this->controllerName = System::DEFAULT_CTRL;
-            $this->actionName = 'index';
-            return;
-        }
-
-        $url = rtrim($_GET[System::URL], '/');
-        $url = filter_var($url, FILTER_SANITIZE_URL);
-        $urlParts = explode('/', $url);
-
-        // Find controller path
-        $path = '';
-        $pathParts = [];
-        
-        foreach ($urlParts as $part) 
-        {
-            $tempPath = $path . ucfirst($part);
-            if (is_dir(System::CTRL_FOLDER . '/' . $tempPath)) 
-            {
-                $path = $tempPath . '/';
-                $pathParts[] = $part;
-            } 
-            else 
-            {
-                break;
-            }
-        }
-        
-        $remainingParts = array_slice($urlParts, count($pathParts));
-        
-        // Controller
-        if (isset($remainingParts[0]) && !empty($remainingParts[0])) 
-            $this->controllerName = ltrim($path, '/') . $remainingParts[0];
-        else 
-            $this->controllerName = rtrim($path, '/') . System::DEFAULT_CTRL;
-        
-
-        // Action
-        if (isset($remainingParts[1]) && !empty($remainingParts[1])) 
-            $this->actionName = $remainingParts[1];
-        else 
-            $this->actionName = 'index';
-        
-
-        // Params
-        if (count($remainingParts) > 2) 
-        {
-            $this->params = array_slice($remainingParts, 2);
-        }
+        return $_SERVER['REQUEST_METHOD'];
     }
 
     public function Get(string $key, $default = null)
@@ -82,28 +31,24 @@ class Request
         return $_POST[$key] ?? $default;
     }
 
-    public function Validate($rules): array|false 
+    public function Validate(array $rules): array
     {
-        print_r ($_POST);
-        $validator = new Validator($_POST, $rules);
+        // Pass a new Database instance to the validator
+        $this->validator = new Validator($_POST, $rules, new Database());
 
-        if (!$validator->Run()) 
+        if (!$this->validator->run()) 
         {
-            return false;
+            // In case of a validation error, we can throw an exception that can be caught in the controller
+            // or in a global error handler to redirect the user back.
+            // For now, we'll return an empty array, but throwing an exception is a better practice.
+            return [];
         }
 
-        return $validator->Validated();
-    }
-
-    protected function AddError(string $field, string $message): void
-    {
-        $this->errors[$field][] = $message;
+        return $this->validator->Validated();
     }
 
     public function GetErrors(): array
     {
-        return $this->errors;
+        return $this->validator ? $this->validator->errors : [];
     }
-
-
 }

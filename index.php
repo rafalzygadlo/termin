@@ -9,7 +9,8 @@
     require __DIR__ . '/helper.php';
 
     //application start
-    (new Core\App())->Run();
+    $routes = require __DIR__ . '/Config/Routes.php';
+    (new Core\App())->Run($routes);
     
 
 // Closing PHP tag is omitted according to good practices (PSR-12)

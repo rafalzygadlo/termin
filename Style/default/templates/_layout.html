@@ -3,7 +3,7 @@
 <html>
     <head>
         <title>
-            <?php print $_SERVER['SCRIPT_NAME']; ?>
+            <?php print __('user.panel.title') ?>
         </title>
         <meta charset="utf-8">
         <base href="<?php if (dirname($_SERVER['SCRIPT_NAME']) == '/') print '/'; else print dirname($_SERVER['SCRIPT_NAME']);  ?>">
@@ -12,9 +12,8 @@
         <link rel="stylesheet" href="Style/default/css/custom.min.css">
         <link rel="stylesheet" href="icons/bootstrap-icons.css">
         
-        <script src="js/bootstrap.bundle.min.js"></script>
         
-
+        
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -25,7 +24,7 @@
         <header>
           <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">main</a>
+              <a class="navbar-brand" href="#"><?= __('user.panel') ?></a>
            
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -33,24 +32,20 @@
               
               <div class="collapse navbar-collapse" id="navbarCollapse" >
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="home"><?php print __('home') ?></a></li>            
+                    <li class="nav-item"><a class="nav-link" href="home"><?= __('home') ?></a></li>            
                 </ul>
               </div>
 
               <div class="collapse navbar-collapse " id="navbarCollapse">
                 <ul class="navbar-nav ms-auto">
-                  <?php if(Core\Session::getValidUser()) { ?>
-                    <li class="nav-item"><a class="nav-link" href="logout"><?php print __('logout') ?></a></li>                    
+                  <?php if(Core\Session::get('valid_user',false)) { ?>
+                    <li class="nav-item"><a class="nav-link" href="logout"><?=__('logout') ?></a></li>                    
                   <?php }else{ ?>
-                    <li class="nav-item"><a class="nav-link" href="register"><?php print __('register') ?></a></li>
-                    <li class="nav-item"><a class="nav-link" href="login"><?php print __('login') ?></a></li>
+                    <li class="nav-item"><a class="nav-link" href="register"><?=__('register') ?></a></li>
+                    <li class="nav-item"><a class="nav-link" href="login"><?=__('login') ?></a></li>
                   <?php } ?>
-                    
-      
                 </ul>
                 </div>
-
-              
               </div>
           </nav>
         </header>
@@ -63,21 +58,21 @@
         
           <hr>
         <footer class="footer">
-          <div class="containe-fluid">
+          <div class="container-fluid">
             <div class="row">
               <div class="col text-center">
                 <h1>LOGO</h1>
               </div>
               <div class="col">
-                <a href="/faq">FAQ</a><br>
-                <a href="/privacy">Polityka prywatności</a><br>
-                <a href="/terms">Regulamin</a><br>
+                <a href="/faq"><?=__('faq') ?></a><br>
+                <a href="/privacy"><?=__('privacy') ?></a><br>
+                <a href="/terms"><?=__('terms') ?></a><br>
               </div>
             </div>
           </div>
           <hr>
           <div class="container text-center">
-            <span class="text-center"><small><?php print __('footer_copyright') ?></small></span>
+            <span class="text-center"><small><?=  __('footer_copyright') ?></small></span>
           </div>
         </footer>
       <script>
@@ -89,5 +84,10 @@
 });
 
       </script>
-        </body>
+      <!-- Custom scripts for specific pages -->
+      <script src="Style/default/js/bootstrap.bundle.min.js"></script>
+      <!-- Assuming your JS files are in a root 'js' folder -->
+      <script src="js/login.js"></script>
+      
+  </body>
 </html>

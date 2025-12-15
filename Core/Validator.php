@@ -11,7 +11,7 @@ class Validator
     public array $errors = [];
     private ?Database $db;
 
-    public function __construct(array $data, array $rules)
+    public function __construct(array $data, array $rules, ?Database $db = null)
     {
         $this->data = $data;
         $this->rules = $rules;
@@ -20,15 +20,17 @@ class Validator
 
     public function Run(): bool
     {
-        foreach ($this->rules as $field => $rules) {
-            $value = $this->post($field);
+        
+        foreach ($this->rules as $field => $rules) 
+        {
+        
+            $value = $this->data[$field] ?? null;
 
             foreach ($rules as $rule) 
-            {
-                
-                [$ruleName, $param] = $this->parseRule($rule);
+            {        
+                [$ruleName, $param] = $this->ParseRule($rule);
 
-                $method = 'validate' . ucfirst($ruleName);
+                $method = ucfirst($ruleName);
                 if (method_exists($this, $method)) 
                 {
                     $this->$method($field, $value, $param);
@@ -40,58 +42,78 @@ class Validator
     }
 
 
-
-    public function validated(): array
+    public function Validated(): array
     {
         $valid = [];
         foreach ($this->rules as $field => $ruleObjects) 
         {
-            if (!isset($this->errors[$field]) && array_key_exists($field, $this->data)) {
+            if (!isset($this->errors[$field]) && array_key_exists($field, $this->data)) 
+            {
                 $valid[$field] = $this->data[$field];
             }
         }
+
         return $valid;
     }
 
-    protected function parseRule(string $rule): array
+    protected function ParseRule(string $rule): array
     {
-        if (strpos($rule, ':') !== false) {
+        if (strpos($rule, ':') !== false) 
+        {
             $parts = explode(':', $rule, 2);
             return [$parts[0], $parts[1]];
         }
         return [$rule, null];
     }
 
-    // przykładowe metody walidacji
-    protected function validateRequired($field, $value, $param)
+    protected function AddError(string $field, string $message): void
     {
-        if (empty($value)) {
-            $this->addError($field, "The {$field} field is required.");
+        $this->errors[$field][] = $message;
+    }
+
+    // Example validation methods
+    protected function Required($field, $value, $param)
+    {
+        if (empty($value)) 
+        {
+            $this->AddError($field, str_replace(':field', $field, __('validation.required')));
         }
     }
 
-    protected function validateEmail($field, $value, $param)
+    protected function Email($field, $value, $param)
     {
-        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            $this->addError($field, "The {$field} must be a valid email address.");
+        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) 
+        {
+            $this->AddError($field, str_replace(':field', $field, __('validation.email')));
         }
     }
 
-    protected function validateMin($field, $value, $param)
+    protected function Min($field, $value, $param)
     {
-        if (strlen($value) < (int) $param) {
-            $this->addError($field, "The {$field} must be at least {$param} characters.");
+        if (strlen($value) < (int) $param) 
+        {
+            $message = str_replace([':field', ':min'], [$field, $param], __('validation.min'));
+            $this->AddError($field, $message);
         }
     }
 
-    protected function validateUnique($field, $value, $param)
+    protected function Unique($field, $value, $param)
     {
         // $param = "users,email"
+        if (!$this->db) 
+        {
+            // Throw an exception or ignore the rule if there is no database connection
+            // throw new \Exception("Database connection not provided to Validator for 'unique' rule.");
+            return;
+        }
+
         [$table, $column] = explode(',', $param);
-        $stmt = $this->db->prepare("SELECT id FROM {$table} WHERE {$column} = ?");
+        // Secure table and column names to prevent SQL Injection
+        $stmt = $this->db->prepare("SELECT `id` FROM `{$table}` WHERE `{$column}` = ?");
         $stmt->execute([$value]);
-        if ($stmt->rowCount() > 0) {
-            $this->addError($field, "The {$field} has already been taken.");
+        if ($stmt->rowCount() > 0) 
+        {
+            $this->AddError($field, str_replace(':field', $field, __('validation.unique')));
         }
     }
 
