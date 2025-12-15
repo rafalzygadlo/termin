@@ -14,6 +14,7 @@ namespace Core;
 
 use Config\System;
 use Core\View;
+use Core\Request\Request;
 
 class App
 {
