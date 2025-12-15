@@ -13,7 +13,7 @@
 // FORM user new,edit
 
 
-namespace Ctrl;
+namespace Http\Ctrl;
 
 
 use Core\Ctrl;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Request;
+namespace Core;
 
 use Config\System;
 
@@ -9,6 +9,9 @@ class Request
     public string $controllerName;
     public string $actionName;
     public array $params = [];
+    protected array $errors = [];
+    public array $rules = [];
+
 
     public function __construct()
     {
@@ -78,4 +81,29 @@ class Request
     {
         return $_POST[$key] ?? $default;
     }
+
+    public function Validate($rules): array|false 
+    {
+        print_r ($_POST);
+        $validator = new Validator($_POST, $rules);
+
+        if (!$validator->Run()) 
+        {
+            return false;
+        }
+
+        return $validator->Validated();
+    }
+
+    protected function AddError(string $field, string $message): void
+    {
+        $this->errors[$field][] = $message;
+    }
+
+    public function GetErrors(): array
+    {
+        return $this->errors;
+    }
+
+
 }
