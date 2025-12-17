@@ -14,12 +14,14 @@
 namespace Http\Ctrl;
 
 use Core\Ctrl;
-
+use Core\Session;
+use Core\Request;
+use Config\System;
 class logoutCtrl extends Ctrl
 {
 
     
-    public function Index()
+    public function index(Request $request)
     {
         session_destroy();
         unset($_SESSION);
@@ -30,12 +32,9 @@ class logoutCtrl extends Ctrl
             unset($cookie); 
         }
 
-	    $_SESSION[LOGIN_EMAIL] = '';
-	    $_SESSION[LOGIN_PASSWORD] = '';
-        setcookie(LOGIN_EMAIL, '', time());
-        setcookie(LOGIN_PASSWORD,'',time());
+	    Session::set('valid_user', false);
 
-        header('Location:'.$this->getDefaultCtrl());
+        header('Location:'.System::DEFAULT_CTRL);
 
     }
 

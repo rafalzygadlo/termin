@@ -3,6 +3,7 @@
 return [
     'GET' => [
         '/' => ['Http\Ctrl\homeCtrl', 'index'],
+        '/home' => ['Http\Ctrl\homeCtrl', 'index'],
         '/login' => ['Http\Ctrl\loginCtrl', 'index'],
         '/register' => ['Http\Ctrl\registerCtrl', 'index'],
         '/logout' => ['Http\Ctrl\logoutCtrl', 'index'],
