@@ -50,8 +50,8 @@ LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `user` VALUES
-(1,1,2,'admin','','',1234567890,'5f4dcc3b5aa765d61d8327deb882cf99','rafal@rewe.org',1,1,'','ucWkB196ZfWfSqFPKhhGpa2MlxbmEsV2c2L030hg7ROmyhn2jTxamAodb16d'),
-(9,3,0,NULL,'','',0,'5f4dcc3b5aa765d61d8327deb882cf99','qotsa@op.pl',1,1,'Z58OFvRlt01CEQrA3ZhILVc8F6pOSKJqLy4UU04yC6Cinp90edZITSPzcoTh35KX','0Ca3GgBAhoCz5qbIhzbbNMMvqNDFctRpBwiteidVk0d2gx1f0NaNXMFlUKl7');
+(1,1,2,'admin','','',1234567890,md5('123'),'qotsa@op.pl',1,1,'','ucWkB196ZfWfSqFPKhhGpa2MlxbmEsV2c2L030hg7ROmyhn2jTxamAodb16d');
+
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;

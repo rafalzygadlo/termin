@@ -42,6 +42,7 @@ class loginCtrl extends Ctrl
         {
             // On successful login, regenerate session ID to prevent session fixation
             session_regenerate_id(true);
+            Session::set('valid_user', true);
             $this->Redirect('/dashboard');
         }
 

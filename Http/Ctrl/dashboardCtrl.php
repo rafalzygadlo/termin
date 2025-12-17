@@ -16,7 +16,6 @@ namespace Http\Ctrl;
 
 use Core\Ctrl;
 use Core\View;
-use Core\Request;
 
 class homeCtrl extends Ctrl
 {
@@ -24,6 +23,6 @@ class homeCtrl extends Ctrl
     public function index()
     {
         $view = new View();
-        $view->Render('home/index');
+        $view->Render('dashboard/index');
     }
 }

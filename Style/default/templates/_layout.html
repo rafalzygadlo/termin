@@ -78,16 +78,12 @@
       <script>
         
         var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-      var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-        return new bootstrap.Popover(popoverTriggerEl)
-       
-});
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+          return new bootstrap.Popover(popoverTriggerEl)
+        });
 
       </script>
       <!-- Custom scripts for specific pages -->
       <script src="Style/default/js/bootstrap.bundle.min.js"></script>
-      <!-- Assuming your JS files are in a root 'js' folder -->
-      <script src="js/login.js"></script>
-      
   </body>
 </html>
