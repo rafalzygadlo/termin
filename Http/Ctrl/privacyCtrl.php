@@ -19,7 +19,7 @@ use Core\View;
 
 class privacyCtrl extends Ctrl 
 {
-    public function Index()
+    public function index()
     {
         $view = new View();
         $view->render('privacy');    

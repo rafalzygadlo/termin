@@ -10,6 +10,7 @@ return [
         '/dashboard' => ['Http\Ctrl\dashboardCtrl', 'index'],
         '/terms' => ['Http\Ctrl\termsCtrl', 'index'],
         '/privacy' => ['Http\Ctrl\privacyCtrl', 'index'],
+        '/user/edit/{id}' => ['Http\Ctrl\userCtrl', 'edit'],
         '/user' => ['Http\Ctrl\userCtrl', 'index'],
         '/password' => ['Http\Ctrl\passwordCtrl', 'index'],
         '/password/reset' => ['Http\Ctrl\passwordCtrl', 'reset'],

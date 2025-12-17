@@ -13,45 +13,43 @@
 namespace Core;
 
 use Config\System;
+use Core\Router;
 use Core\View;
 use Core\Request;
 
 class App
 {
-    protected string $controllerClass;
-    protected string $actionName;
     protected Request $request;
 
     public function Run($routes)
     {
         $this->request = new Request();
-        
-        $uri = $this->request->getUri();
-        $method = $this->request->getMethod();
+        $router = new Router($routes);
 
-        if (isset($routes[$method][$uri])) 
-        {
-            [$controller, $action] = $routes[$method][$uri];
-            $this->controllerClass = $controller;
-            $this->actionName = $action;
-            $this->LoadController($this->request);
+        $matchedRoute = $router->match($this->request);
+
+        if ($matchedRoute) {
+            // Set the captured route parameters on the request object
+            $this->request->setRouteParams($matchedRoute['params']);
+            $this->LoadController($matchedRoute['controller'], $matchedRoute['action']);
         } else {
             $this->LoadErrorController();
         }
     }
 
-    private function LoadController(Request $request)
+    private function LoadController(string $controllerClass, string $actionName)
     {
-        if (!class_exists($this->controllerClass)) 
+        if (!class_exists($controllerClass)) 
         {
             $this->LoadErrorController();
             return;
         }
      
-        $controller = new $this->controllerClass;
+        $controller = new $controllerClass;
 
-        if (method_exists($controller, $this->actionName)) 
-           $controller->Run($this->actionName, $this->request);
+        if (method_exists($controller, $actionName)) 
+            // Call the Run method on the controller, which executes checkers and then the action.
+            $controller->Run($actionName, $this->request);
          else 
             $this->LoadErrorController();
     }

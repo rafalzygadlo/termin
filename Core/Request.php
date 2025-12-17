@@ -7,6 +7,7 @@ use Config\System;
 class Request
 {
     protected ?Validator $validator = null;
+    protected array $routeParams = [];
 
     public function getUri(): string
     {
@@ -29,6 +30,26 @@ class Request
     public function Post(string $key, $default = null)
     {
         return $_POST[$key] ?? $default;
+    }
+
+    /**
+     * Sets the route parameters captured by the Router.
+     */
+    public function setRouteParams(array $params): void
+    {
+        $this->routeParams = $params;
+    }
+
+    /**
+     * Gets a route parameter by its name.
+     * e.g., for a route /user/edit/{id}, getParam('id') will return the value.
+     *
+     * @param string $name The name of the parameter.
+     * @param mixed $default The default value if the parameter doesn't exist.
+     */
+    public function getParam(string $name, $default = null)
+    {
+        return $this->routeParams[$name] ?? $default;
     }
 
     public function Validate(array $rules): array

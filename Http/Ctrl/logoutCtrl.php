@@ -21,7 +21,7 @@ class logoutCtrl extends Ctrl
 {
 
     
-    public function index(Request $request)
+    public function index()
     {
         session_destroy();
         unset($_SESSION);
