@@ -14,9 +14,8 @@ class CheckerAdminLogin extends Checker
         //$user = new \Model\UserModel();
         //print_r($user->GetAll());
         
-        header('location: /login');   
-        
-           		
+        header('location: /login');
+        exit; // Zawsze wywołuj exit() po przekierowaniu header()
     }
 
 }

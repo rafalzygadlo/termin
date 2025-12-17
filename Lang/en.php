@@ -20,7 +20,10 @@ return
     "error_404_message" =>"Sorry, the requested page does not exist or has been moved.",
     "back"              =>"Back",
     "remember_me"       =>"Remember me",
-
+    "settings"          =>"Settings",
+    "profile"           =>"Profile",
+    "logout"            =>"Logout",
+    
     // Validation messages
     "validation.required" => "The :field field is required.",
     "validation.email"    => "The :field must be a valid email address.",

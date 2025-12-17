@@ -54,6 +54,11 @@ class loginCtrl extends Ctrl
 
     public function index()
     {	   
+        if(Session::get('valid_user', false)) 
+        {
+            $this->Redirect('/dashboard');
+        }
+        
         $errors = Session::getFlash('errors', []);
         $old = Session::getFlash('old', []);
 
