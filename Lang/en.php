@@ -1,30 +1,48 @@
 <?php
 
+/*
+ *  
+ *   en.php
+ *   
+ *   @category   Language File
+ *   @package    Core
+ *   @author     rafal zygadlo rafal@zygadlo.org
+ *   @copyright  Copyright (c) 2025 zygadlo.org
+ *   @license    MIT
+ *  
+ */
+
+
 return 
 [
     "manufacturers"     =>"Manufacturers",
     "product"           =>"Product",
     "login"             =>"Login",
+    "login.error"       =>"Email or password is incorrect",
     'register'          =>"Register",
-    "login_error"       =>"Login error",
-    "please_login"      =>"Please log in",
+    "please.login"      =>"Please log in",
     "work"              =>"Work",
     "account"           =>"Account",
     "time"              =>"Time",
     "days"              =>"Days",
     "config"            =>"Config",
-    "admin_panel"       =>"Admin panel",
+    "admin.panel"       =>"Admin panel",
     "home"              =>"Home",
-    "footer_copyright"  =>"2021 All rights reserved.<b> maxkod.pl</b>",
-    "error_404_title"   =>"Page not found",
-    "error_404_message" =>"Sorry, the requested page does not exist or has been moved.",
+    "footer.copyright"  =>"2021-2025 All rights reserved. <b>zygadlo.org</b>",
+    "error.404.title"   =>"Page not found",
+    "error.404.message" =>"Sorry, the requested page does not exist or has been moved.",
     "back"              =>"Back",
-    "remember_me"       =>"Remember me",
+    "remember.me"       =>"Remember me",
     "settings"          =>"Settings",
     "profile"           =>"Profile",
     "logout"            =>"Logout",
+    "validation.errors" =>"Please correct the following errors:",
+    "faq"               =>"FAQ",
+    "terms"             =>"Terms of service",
+    'privacy'           =>"Privacy policy",
+    "page.title"        =>"Termin",
     
-    // Validation messages
+    // validation messages
     "validation.required" => "The :field field is required.",
     "validation.email"    => "The :field must be a valid email address.",
     "validation.min"      => "The :field must be at least :min characters.",

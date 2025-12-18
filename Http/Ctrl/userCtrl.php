@@ -1,16 +1,17 @@
 <?php
 
-/**
- * userCtrl
- * 
- * @category   Controller
- * @package    CMS
- * @author     Rafał Żygadło <rafal@maxkod.pl>
- 
- * @copyright  2016 maxkod.pl
- * @version    1.0
+/*
+ *  
+ *   userCtrl.php
+ *   
+ *   @category   Controller
+ *   @package    Core
+ *   @author     rafal zygadlo rafal@zygadlo.org
+ *   @copyright  Copyright (c) 2025 zygadlo.org
+ *   @license    MIT
+ *  
  */
-// FORM user new,edit
+
 
 
 namespace Http\Ctrl;
@@ -41,7 +42,7 @@ class userCtrl extends authCtrl
         $id = (int) $request->getParam('id');
         $userModel = new UserModel();
 
-        $user = $userModel->find($id); // Zakładam, że model ma metodę find() do szukania po ID
+        $user = $userModel->find($id); 
 
         // If user not found, show 404 error page
         if (!$user) {

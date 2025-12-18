@@ -9,7 +9,7 @@ class Session
     /**
      * Starts the session if it's not already started.
      */
-    public static function start()
+    public static function Start()
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
@@ -21,9 +21,9 @@ class Session
      * @param string $key
      * @param mixed $value
      */
-    public static function set(string $key, $value)
+    public static function Set(string $key, $value)
     {
-        self::start();
+        self::Start();
         $_SESSION[$key] = $value;
     }
 
@@ -33,9 +33,9 @@ class Session
      * @param mixed $default
      * @return mixed
      */
-    public static function get(string $key, $default = null)
+    public static function Get(string $key, $default = null)
     {
-        self::start();
+        self::Start();
         return $_SESSION[$key] ?? $default;
     }
 
@@ -44,9 +44,9 @@ class Session
      * @param string $key
      * @param mixed $value
      */
-    public static function flash(string $key, $value)
+    public static function Flash(string $key, $value)
     {
-        self::start();
+        self::Start();
         $_SESSION[self::FLASH_KEY][$key] = $value;
     }
 
@@ -56,12 +56,35 @@ class Session
      * @param mixed $default
      * @return mixed
      */
-    public static function getFlash(string $key, $default = null)
+    public static function GetFlash(string $key, $default = null)
     {
-        self::start();
+        self::Start();
         $message = $_SESSION[self::FLASH_KEY][$key] ?? $default;
         unset($_SESSION[self::FLASH_KEY][$key]);
         return $message;
+    }
+
+    /**
+     * Flashes validation-related data (errors and old input) to the session.
+     * @param array $errors The validation errors.
+     * @param array $oldInput The old form input.
+     */
+    public static function FlashValidationState(array $errors, array $oldInput)
+    {
+        self::Flash('errors', $errors);
+        self::Flash('old', $oldInput);
+    }
+
+    /**
+     * Retrieves and clears validation-related data from the session.
+     * @return array An array containing 'errors' and 'old' keys.
+     */
+    public static function GetValidationState(): array
+    {
+        return [
+            'errors' => self::GetFlash('errors', []),
+            'old' => self::GetFlash('old', [])
+        ];
     }
             
 }

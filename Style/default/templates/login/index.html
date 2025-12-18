@@ -8,7 +8,7 @@
       <?php endif; ?>
       <?php if (!empty($errors) && empty($errors['general'])): ?>
         <div class="alert alert-danger">
-            <b>Proszę poprawić następujące błędy:</b>
+            <b><?= __('validation.errors'); ?></b>
             <ul>
                 <?php foreach ($errors as $fieldErrors): ?>
                     <?php foreach ($fieldErrors as $error): ?>
@@ -18,26 +18,11 @@
             </ul>
         </div>
       <?php endif; ?>
-    
-      <!--
-      <h2 >Witaj w królestwie bolesławieckich absurdów!</h2>
-        <p>Tutaj możesz dodawać własne newsy o Bolesławcu i powiecie bolesławieckim — im bardziej absurdalne i zabawne, tym lepiej! Krasnale, kaczki, pierogi, mosty zamienione w tory wyścigowe… wszystko jest mile widziane.</p>
-        <p><strong>Co zyskujesz po zalogowaniu:</strong></p>
-        Możliwość dodawania artykułów, które trafią do naszej strony głównej.<br>
-        Szansa, że Twój artykuł zostanie wybrany artykułem tygodnia i zgarniesz <strong>100 zł nagrody</strong>.<br>
-        Możliwość głosowania na najlepsze newsy innych użytkowników.<br>
-        <p><strong>Kilka wskazówek:</strong></p>
-        
-        Pisz krótkie, zabawne lub absurdalne historie.<br>
-        Nie kopiuj prawdziwych newsów — tu liczy się kreatywność!<br>
-        Jeśli nie chcesz się logować, możesz dodawać artykuły anonimowo, ale głosy i nagroda tygodnia dostępne są tylko dla zalogowanych.<br>
-    -->
 
-
-   
-        <h2>New here?</h2>
-        <p>Create an account to start sharing your absurd news about Bolesławiec!</p>
-        <a class="btn btn-lg btn-secondary" href="register">Sign Up</a>
+        <br>
+        <h2>New here ?</h2>
+        <p>Create an account to start sharing your absurd news about ...</p>
+        <a class="btn btn-lg btn-secondary" href="register"><?= __('register') ?></a>
         <p class="mt-3"><small class="text-muted">By clicking Sign up, you agree to the terms of use.</small></p>
       </div>
       
@@ -62,7 +47,7 @@
       
           <div class="form-check mb-3">
               <input class="form-check-input" type="checkbox" value="1" id="rememberMe" name="remember"> 
-              <label class="form-check-label" for="rememberMe"> <?= __('remember_me'); ?></label>
+              <label class="form-check-label" for="rememberMe"> <?= __('remember.me'); ?></label>
           </div>
       
           <button class="btn btn-lg btn-primary" type="submit">Login</button>

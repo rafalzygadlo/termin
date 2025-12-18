@@ -1,19 +1,21 @@
 <?php
-
-/**
- * termsCtrl
- * 
- * @category   Controller
- * @package    CMS
- * @author     rafal zygadlo <rafal@maxkod.pl>
- 
- * @copyright  2016 maxkod.pl
- * @version    1.0
+/*
+ *  
+ *   termsCtrl.php
+ *   
+ *   @category   Controller
+ *   @package    Core
+ *   @author     rafal zygadlo rafal@zygadlo.org
+ *   @copyright  Copyright (c) 2025 zygadlo.org
+ *   @license    MIT
+ *  
  */
+
 
 namespace Http\Ctrl;
 
 use Core\Ctrl;
+
 use Core\View;
 
 

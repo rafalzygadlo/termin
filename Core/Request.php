@@ -9,7 +9,7 @@ class Request
     protected ?Validator $validator = null;
     protected array $routeParams = [];
 
-    public function getUri(): string
+    public function GetUri(): string
     {
         $uri = $_GET[System::URL] ?? '/';
         $uri = rtrim($uri, '/');
@@ -17,7 +17,7 @@ class Request
         return $uri === '' ? '/' : $uri;
     }
 
-    public function getMethod(): string
+    public function GetMethod(): string
     {
         return $_SERVER['REQUEST_METHOD'];
     }
@@ -33,9 +33,18 @@ class Request
     }
 
     /**
+     * Gets all POST data.
+     * @return array
+     */
+    public function GetAllPost(): array
+    {
+        return $_POST;
+    }
+
+    /**
      * Sets the route parameters captured by the Router.
      */
-    public function setRouteParams(array $params): void
+    public function SetRouteParams(array $params): void
     {
         $this->routeParams = $params;
     }
@@ -47,7 +56,7 @@ class Request
      * @param string $name The name of the parameter.
      * @param mixed $default The default value if the parameter doesn't exist.
      */
-    public function getParam(string $name, $default = null)
+    public function GetParam(string $name, $default = null)
     {
         return $this->routeParams[$name] ?? $default;
     }

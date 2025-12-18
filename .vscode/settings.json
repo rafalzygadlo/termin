@@ -15,5 +15,31 @@
             "username": "usr",
             "askForPassword": true
         }
+    ],
+
+    // Konfiguracja wtyczki "PSI-Header"
+    "psi-header.variables": [
+        ["author", "rafal zygadlo"],
+        ["authoremail", "rafal@zygadlo.org"],
+        ["company", "zygadlo.org"]
+        ["category", "Controller"],
+        ["package", "Core"],
+        ["license", "MIT"]
+    ],
+    "psi-header.templates": [
+        {
+            "language": "php",
+            "template": [
+                " ",
+                "  <<filename>>",
+                "  ",
+                "  @category   <<category>>",
+                "  @package    <<package>>",
+                "  @author     <<author>> <<authoremail>>",
+                "  @copyright  Copyright (c) <<year>> <<company>>",
+                "  @license    <<license>>",
+                " "
+            ]
+        }
     ]
 }

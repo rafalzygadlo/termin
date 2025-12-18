@@ -1,14 +1,4 @@
 <?php
-/**
- * authCtrl
- * 
- * @category   Controller
- * @package    CMS
- * @author     rafal zygadlo
- 
- * @copyright  2017-03-18 maxkod.pl
- * @version    1.0
- */
 
 namespace Http\Ctrl;
 
