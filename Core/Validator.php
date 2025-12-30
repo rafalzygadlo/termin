@@ -9,13 +9,13 @@ class Validator
     private array $data;
     private array $rules;
     public array $errors = [];
-    private ?Database $db;
 
-    public function __construct(array $data, array $rules, ?Database $db = null)
+
+    public function __construct(array $data, array $rules)
     {
         $this->data = $data;
         $this->rules = $rules;
-        $this->db = $db;
+        $this->db = Database::instance();
     }
 
     public function Run(): bool
@@ -99,14 +99,7 @@ class Validator
 
     protected function Unique($field, $value, $param)
     {
-        // $param = "users,email"
-        if (!$this->db) 
-        {
-            // Throw an exception or ignore the rule if there is no database connection
-            // throw new \Exception("Database connection not provided to Validator for 'unique' rule.");
-            return;
-        }
-
+      
         [$table, $column] = explode(',', $param);
         // Secure table and column names to prevent SQL Injection
         $stmt = $this->db->prepare("SELECT `id` FROM `{$table}` WHERE `{$column}` = ?");

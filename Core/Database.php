@@ -20,13 +20,25 @@ class Database extends PDO
 {
 
     private $sth;
-    private PDO $pdo;
+    private static $instance = null;
+
+    public static function instance()
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
     
-    public function __construct()
+    private function __construct()
     {
         parent::__construct(Db::TYPE . ':host=' . Db::HOST . ';dbname=' . Db::NAME,  Db::USER, Db::PASSWORD);
         $this->exec('SET NAMES utf8');
     }
+
+    private function __clone() {}
+
+    public function __wakeup() {}
 
     public function FetchRow($sql,$params)
     {

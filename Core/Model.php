@@ -15,30 +15,12 @@
 namespace Core;
 
 
-class Model extends Database
+abstract class Model
 {
+    protected Database $db;
 
-    
     public function __construct()
-    {   
-        parent::__construct();
-    }
-
-    public function GetTitle()
     {
-        throw new myException('NOT IMPLEMENTED', __FUNCTION__);
+        $this->db = Database::instance();
     }
-
-
-    public function Update()
-    {
-        throw new myException('NOT IMPLEMENTED', __FUNCTION__);
-    }
-
-    public function CountAll()
-    {
-        return 0;
-    }
-    
 }
-

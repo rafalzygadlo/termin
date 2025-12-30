@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="autoload.php">
+<phpunit bootstrap="autoload.php" apxmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         bootstrap="autoload.php"
+         colors="true"
+         verbose="true">
     <testsuites>
-        <testsuite name="AllTests">
+        <testsuite name="Unit">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">Core</directory>
+            <directory suffix=".php">Model</directory>
+            <directory suffix=".php">Http</directory>
+        </include>
+    </coverage>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+    </php>
 </phpunit>

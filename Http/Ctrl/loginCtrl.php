@@ -18,22 +18,27 @@ use Core\View;
 use Core\Session;
 use Model\UserModel;
 use Core\Request;
-use Http\Request\LoginRequest;
+use Core\Validator;
 
 class loginCtrl extends Ctrl
 {
    
-    public function do()
+    public function do(Request $request)
     {
-        $request = new LoginRequest();
-        $credentials = $request->Validate($request->rules());
+        $rules = [
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ];
+        $validator = new Validator($request->GetAllPost(), $rules);
 
         // If validation fails, $credentials will be empty
-        if (empty($credentials)) 
+        if (!$validator->Run()) 
         {
-            Session::FlashValidationState($request->GetErrors(), $request->GetAllPost());
+            Session::FlashValidationState($validator->errors, $request->GetAllPost());
             $this->redirect('/login');
         }
+
+        $credentials = $validator->Validated();
 
         if ((new UserModel)->Login($credentials['email'], $credentials['password'])) 
         {

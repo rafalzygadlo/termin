@@ -19,7 +19,7 @@ use Core\Ctrl;
 use Core\Request;
 use Model\RegisterModel;
 use Core\View;
-use Http\Request\RegisterRequest;
+use Core\Validator;
 
 class registerCtrl extends Ctrl
 {
@@ -41,22 +41,26 @@ class registerCtrl extends Ctrl
    
     public function do(Request $request)
     {
-        $registerRequest = new RegisterRequest();
-        if (!$registerRequest->validate()) 
+        $rules = [
+            'email' => ['required', 'email', 'unique:user,email'],
+            'password' => ['required', 'min:8'],
+        ];
+        $validator = new Validator($request->GetAllPost(), $rules);
+
+        if (!$validator->Run()) 
         {
             // If validation fails, re-render the form with errors and old input
             $this->renderRegistrationForm([
-                'errors' => $registerRequest->getErrors(),
-                'old' => $_POST
+                'errors' => $validator->errors,
+                'old' => $request->GetAllPost()
             ]);
             return;
         }
 
+        $validated = $validator->Validated();
         $model = new RegisterModel();
-        $email = $registerRequest->post('email');
-
-        
-        $password = $registerRequest->post('password');
+        $email = $validated['email'];
+        $password = $validated['password'];
         $userId = $model->CreateUser($email, $password);
         
         // Generate a unique activation key.
@@ -70,8 +74,7 @@ class registerCtrl extends Ctrl
         
         // It's a good practice to redirect after a successful POST request
         // to prevent form re-submission on page refresh.
-        header('Location: /login');
-        exit();
+        $this->redirect('/login');
     }
    
   
@@ -80,6 +83,6 @@ class registerCtrl extends Ctrl
        $this->renderRegistrationForm([
                 'errors' => array(),
                 'old' => array()
-            ]);;
+            ]);
     }
 }

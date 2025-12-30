@@ -6,7 +6,6 @@ use Config\System;
 
 class Request
 {
-    protected ?Validator $validator = null;
     protected array $routeParams = [];
 
     public function GetUri(): string
@@ -59,26 +58,5 @@ class Request
     public function GetParam(string $name, $default = null)
     {
         return $this->routeParams[$name] ?? $default;
-    }
-
-    public function Validate(array $rules): array
-    {
-        // Pass a new Database instance to the validator
-        $this->validator = new Validator($_POST, $rules, new Database());
-
-        if (!$this->validator->run()) 
-        {
-            // In case of a validation error, we can throw an exception that can be caught in the controller
-            // or in a global error handler to redirect the user back.
-            // For now, we'll return an empty array, but throwing an exception is a better practice.
-            return [];
-        }
-
-        return $this->validator->Validated();
-    }
-
-    public function GetErrors(): array
-    {
-        return $this->validator ? $this->validator->errors : [];
     }
 }
