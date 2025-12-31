@@ -22,7 +22,7 @@ class homeCtrl extends Ctrl
 {
     public function index()
     {
-        $view = new \View\Admin\homeView();
+        $view = new \View\Admin\BaseView();
         $view->Render('admin/home/index');
     }
 }

@@ -18,6 +18,7 @@ return [
         '/profile/edit' => ['Ctrl\profileCtrl', 'edit'],
         '/settings' => ['Ctrl\settingsCtrl', 'index'],
         '/settings/edit' => ['Ctrl\settingsCtrl', 'edit'],
+        '/admin/home' => ['Ctrl\Admin\homeCtrl', 'index'],
     ],
     'POST' => [
         '/login/do' => ['Ctrl\loginCtrl', 'do'],

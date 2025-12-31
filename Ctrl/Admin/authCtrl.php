@@ -20,6 +20,7 @@ class authCtrl extends Ctrl
 {
     public function __construct()
     {
+        parent::__construct("","","");
     	$this->AddChecker(new CheckerAdminLogin);
     }
 
