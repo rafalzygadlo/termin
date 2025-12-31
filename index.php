@@ -1,5 +1,5 @@
 <?php
-    
+    session_start();
     ini_set('log_errors', true);        // Error/Exception file logging engine.
     ini_set('error_log', __DIR__ . '/errors.log'); // Logging file path
     ini_set("display_errors","on");

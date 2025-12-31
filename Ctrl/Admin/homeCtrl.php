@@ -12,7 +12,7 @@
  */
 
 
-namespace Http\Ctrl\Admin;
+namespace Ctrl\Admin;
 
 use Core\Ctrl;
 use Ctrl\Admin\authCtrl;

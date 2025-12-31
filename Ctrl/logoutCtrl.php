@@ -11,7 +11,7 @@
  * @version    1.0
  */
 
-namespace Http\Ctrl;
+namespace Ctrl;
 
 use Core\Ctrl;
 use Core\Session;

@@ -1,16 +1,17 @@
 <?php
 
-namespace Http\Ctrl;
+
+namespace Ctrl;
 
 use Core\Ctrl;
 use Core\View;
 
-class dashboardCtrl extends authCtrl
+class homeCtrl extends Ctrl
 {
     
     public function index()
     {
         $view = new View();
-        $view->Render('dashboard/index');
+        $view->Render('home/index');
     }
 }

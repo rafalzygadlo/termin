@@ -2,22 +2,22 @@
     <div class="col-md-4 col-md-offset-4 col-sm-12">
         <form method="POST" action="/password/save">
             <fieldset>
-                <legend><? print __('change.password') ?></legend>
+                <legend><? print _msg('change.password') ?></legend>
                 <div class="form-group">
-                    <label class="control-label"><?php print __('password') ?></label>
-                    <input type="password" class="form-control" placeholder="<?php print __('password') ?>" name="password" value="<?php  ?>">
+                    <label class="control-label"><?php print _msg('password') ?></label>
+                    <input type="password" class="form-control" placeholder="<?php print _msg('password') ?>" name="password" value="<?php  ?>">
                     <?php   ?>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label"><?php print __('repeat_password') ?></label>
-                    <input type="password" class="form-control" placeholder="<?php print __('repeat.password') ?>" name="repeat_password" value="<?php ?>">
+                    <label class="control-label"><?php print _msg('repeat_password') ?></label>
+                    <input type="password" class="form-control" placeholder="<?php print _msg('repeat.password') ?>" name="repeat_password" value="<?php ?>">
                     <?php  ?>
                 </div>
 
                 <div class="form-group">
                     <input type="hidden" name="method" value="save">
-                    <button type="submit" class="btn btn-primary pull-right"><?php print __('save') ?></button>
+                    <button type="submit" class="btn btn-primary pull-right"><?php print _msg('save') ?></button>
                 </div>
             </fieldset>
         </form>

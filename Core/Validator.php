@@ -9,8 +9,7 @@ class Validator
     private array $data;
     private array $rules;
     public array $errors = [];
-
-
+    public Database $db;
     public function __construct(array $data, array $rules)
     {
         $this->data = $data;
@@ -76,7 +75,7 @@ class Validator
     {
         if (empty($value)) 
         {
-            $this->AddError($field, str_replace(':field', $field, __('validation.required')));
+            $this->AddError($field, str_replace(':field', $field, _msg('validation.required')));
         }
     }
 
@@ -84,7 +83,7 @@ class Validator
     {
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) 
         {
-            $this->AddError($field, str_replace(':field', $field, __('validation.email')));
+            $this->AddError($field, str_replace(':field', $field, _msg('validation.email')));
         }
     }
 
@@ -92,7 +91,7 @@ class Validator
     {
         if (strlen($value) < (int) $param) 
         {
-            $message = str_replace([':field', ':min'], [$field, $param], __('validation.min'));
+            $message = str_replace([':field', ':min'], [$field, $param], _msg('validation.min'));
             $this->AddError($field, $message);
         }
     }
@@ -106,7 +105,7 @@ class Validator
         $stmt->execute([$value]);
         if ($stmt->rowCount() > 0) 
         {
-            $this->AddError($field, str_replace(':field', $field, __('validation.unique')));
+            $this->AddError($field, str_replace(':field', $field, _msg('validation.unique')));
         }
     }
 

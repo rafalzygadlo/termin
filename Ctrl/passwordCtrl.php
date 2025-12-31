@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Ctrl;
+namespace Ctrl;
 
 use Core\View;
 use Model\PasswordReset;

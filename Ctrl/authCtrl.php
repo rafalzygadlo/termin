@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Ctrl;
+namespace Ctrl;
 
 use Core\Ctrl;
 use Core\Checker\CheckerLogin;

@@ -11,7 +11,7 @@
  * @version    1.0
  */
 
-namespace Http\Ctrl;
+namespace Ctrl;
 
 use Core\Ctrl;
 use Core\View;
@@ -49,7 +49,7 @@ class loginCtrl extends Ctrl
         }
 
         // Handle failed login (wrong credentials)
-        Session::FlashValidationState(['general' => [__('login.error')]], $request->GetAllPost());
+        Session::FlashValidationState([[_msg('login.error')]], $request->GetAllPost());
         $this->redirect('/login');
     }
 
